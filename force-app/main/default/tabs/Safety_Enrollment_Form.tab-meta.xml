@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomTab xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Multi-step Safety Training enrollment form</description>
+    <label>Enroll Now</label>
+    <lwcComponent>safetyEnrollmentForm</lwcComponent>
+    <motif>Custom13: Hands</motif>
+</CustomTab>

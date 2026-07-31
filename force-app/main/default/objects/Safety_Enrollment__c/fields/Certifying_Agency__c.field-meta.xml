@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Certifying_Agency__c</fullName>
+    <label>Certifying Agency</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+                <value><fullName>Not Sure</fullName><default>false</default><label>Not Sure</label></value>
+                <value><fullName>American Heart Association</fullName><default>false</default><label>American Heart Association</label></value>
+                <value><fullName>American Red Cross</fullName><default>false</default><label>American Red Cross</label></value>
+                <value><fullName>ECSI (Emergency Care & Safety Institute)</fullName><default>false</default><label>ECSI (Emergency Care & Safety Institute)</label></value>
+                <value><fullName>American Trauma Event Management</fullName><default>false</default><label>American Trauma Event Management</label></value>
+                <value><fullName>National Safety Council</fullName><default>false</default><label>National Safety Council</label></value>
+                <value><fullName>Custom Class</fullName><default>false</default><label>Custom Class</label></value>
+                <value><fullName>Other</fullName><default>false</default><label>Other</label></value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

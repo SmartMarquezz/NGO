@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <brand>
+        <headerColor>#19A59F</headerColor>
+        <shouldOverrideOrgTheme>true</shouldOverrideOrgTheme>
+    </brand>
+    <description>All Care Plus Safety Training enrollments and insights</description>
+    <formFactors>Small</formFactors>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <label>All Care CPR</label>
+    <navType>Standard</navType>
+    <tabs>Safety_Enrollment_Dashboard</tabs>
+    <tabs>Safety_Enrollment_Form</tabs>
+    <tabs>Safety_Enrollment__c</tabs>
+    <uiType>Lightning</uiType>
+</CustomApplication>

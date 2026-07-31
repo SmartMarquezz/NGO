@@ -1,0 +1,157 @@
+<template>
+    <div class="dash">
+        <header class="dash-hero">
+            <div>
+                <div class="eyebrow">ALL CARE PLUS</div>
+                <h1>Safety Training Command Center</h1>
+                <p>Every enrollment in one visual view — readiness, agencies, and learner profiles.</p>
+            </div>
+            <button class="refresh" onclick={handleRefresh}>Refresh</button>
+        </header>
+
+        <template if:true={error}>
+            <div class="error">{error}</div>
+        </template>
+
+        <section class="kpi-row">
+            <article class="kpi">
+                <span>Total Enrollments</span>
+                <strong>{total}</strong>
+            </article>
+            <article class="kpi">
+                <span>Avg CPR Confidence</span>
+                <strong>{readiness.confidence}</strong>
+            </article>
+            <article class="kpi">
+                <span>Avg Physical Health</span>
+                <strong>{readiness.physical}</strong>
+            </article>
+            <article class="kpi">
+                <span>Want Self-Care Learning</span>
+                <strong>{selfCareYes}</strong>
+            </article>
+        </section>
+
+        <template if:false={hasData}>
+            <section class="empty">No enrollments yet. Submissions from the Safety Training form will appear here.</section>
+        </template>
+
+        <template if:true={hasData}>
+            <section class="grid">
+                <article class="panel">
+                    <h2>Rescuer Readiness Averages</h2>
+                    <template for:each={readinessCards} for:item="card">
+                        <div key={card.key} class="meter">
+                            <div class="meter-head">
+                                <span>{card.label}</span>
+                                <strong>{card.score}</strong>
+                            </div>
+                            <div class="meter-track"><div class="meter-fill teal" style={card.style}></div></div>
+                        </div>
+                    </template>
+                </article>
+
+                <article class="panel">
+                    <h2>Certifying Agencies</h2>
+                    <template for:each={byAgency} for:item="row">
+                        <div key={row.label} class="meter">
+                            <div class="meter-head">
+                                <span>{row.label}</span>
+                                <strong>{row.value}</strong>
+                            </div>
+                            <div class="meter-track"><div class="meter-fill blue" style={row.style}></div></div>
+                        </div>
+                    </template>
+                </article>
+
+                <article class="panel">
+                    <h2>Employment Status</h2>
+                    <template for:each={byEmployment} for:item="row">
+                        <div key={row.label} class="meter">
+                            <div class="meter-head">
+                                <span>{row.label}</span>
+                                <strong>{row.value}</strong>
+                            </div>
+                            <div class="meter-track"><div class="meter-fill coral" style={row.style}></div></div>
+                        </div>
+                    </template>
+                </article>
+
+                <article class="panel">
+                    <h2>Education Level</h2>
+                    <template for:each={byEducation} for:item="row">
+                        <div key={row.label} class="meter">
+                            <div class="meter-head">
+                                <span>{row.label}</span>
+                                <strong>{row.value}</strong>
+                            </div>
+                            <div class="meter-track"><div class="meter-fill teal" style={row.style}></div></div>
+                        </div>
+                    </template>
+                </article>
+
+                <article class="panel">
+                    <h2>Prior CPR Experience</h2>
+                    <template for:each={byCpr} for:item="row">
+                        <div key={row.label} class="meter">
+                            <div class="meter-head">
+                                <span>{row.label}</span>
+                                <strong>{row.value}</strong>
+                            </div>
+                            <div class="meter-track"><div class="meter-fill blue" style={row.style}></div></div>
+                        </div>
+                    </template>
+                </article>
+
+                <article class="panel">
+                    <h2>Self-Care Interest</h2>
+                    <template for:each={bySelfCare} for:item="row">
+                        <div key={row.label} class="meter">
+                            <div class="meter-head">
+                                <span>{row.label}</span>
+                                <strong>{row.value}</strong>
+                            </div>
+                            <div class="meter-track"><div class="meter-fill coral" style={row.style}></div></div>
+                        </div>
+                    </template>
+                </article>
+            </section>
+
+            <section class="panel table-panel">
+                <h2>Recent Enrollments</h2>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Learner</th>
+                                <th>Email</th>
+                                <th>Class</th>
+                                <th>Agency</th>
+                                <th>Group</th>
+                                <th>Submitted</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template for:each={recent} for:item="row">
+                                <tr key={row.Id}>
+                                    <td>
+                                        <strong>{row.fullName}</strong>
+                                        <div class="subtle">{row.Profession__c}</div>
+                                    </td>
+                                    <td>{row.Email__c}</td>
+                                    <td>
+                                        <div>{row.Class_Date__c}</div>
+                                        <div class="subtle">{row.Class_Time__c}</div>
+                                    </td>
+                                    <td>{row.Certifying_Agency__c}</td>
+                                    <td>{row.Group_Name__c}</td>
+                                    <td>{row.submitted}</td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </template>
+    </div>
+</template>
