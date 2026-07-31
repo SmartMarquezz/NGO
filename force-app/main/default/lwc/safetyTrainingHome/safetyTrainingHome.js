@@ -1,26 +1,90 @@
 import { LightningElement, api } from 'lwc';
+import MEDIA from '@salesforce/resourceUrl/acpTrainingMedia';
 
 export default class SafetyTrainingHome extends LightningElement {
     @api enrollPath = '/enroll';
 
-    competencies = [
+    media = {
+        hero: `${MEDIA}/acpTrainingMedia/hero.jpg`,
+        team: `${MEDIA}/acpTrainingMedia/team.jpg`,
+        cpr: `${MEDIA}/acpTrainingMedia/cpr.jpg`,
+        firstaid: `${MEDIA}/acpTrainingMedia/firstaid.jpg`,
+        manikin: `${MEDIA}/acpTrainingMedia/manikin.jpg`,
+        family: `${MEDIA}/acpTrainingMedia/family.jpg`,
+        work: `${MEDIA}/acpTrainingMedia/work.jpg`,
+        community: `${MEDIA}/acpTrainingMedia/community.jpg`,
+        close: `${MEDIA}/acpTrainingMedia/close.jpg`
+    };
+
+    get courses() {
+        return [
+            {
+                key: 'cpr',
+                title: 'CPR & AED',
+                detail: 'Adult, child, and infant CPR with AED skills you can use the moment someone collapses.',
+                image: this.media.cpr,
+                alt: 'Hands practicing chest compressions during CPR training'
+            },
+            {
+                key: 'firstaid',
+                title: 'First Aid',
+                detail: 'Bleed control, burns, fractures, choking, allergic reactions, and sudden medical emergencies.',
+                image: this.media.firstaid,
+                alt: 'First aid and emergency medical supplies'
+            },
+            {
+                key: 'bls',
+                title: 'BLS for Providers',
+                detail: 'High-performance team skills for clinics, EMS partners, and healthcare workplaces.',
+                image: this.media.team,
+                alt: 'Healthcare team prepared for emergency care'
+            }
+        ];
+    }
+
+    formats = [
         {
-            title: 'Basic Life Support',
-            detail: 'High-quality CPR for adults, children, and infants — plus confident AED use in cardiac arrest.'
+            key: 'classroom',
+            title: 'In-Person',
+            detail: 'Hands-on practice with certified instructors. Manikins, AEDs, and real coaching in the room with you.'
         },
         {
-            title: 'Scene & Victim Assessment',
-            detail: 'Assess safely, prioritize care, and act with a clear first-response plan.'
+            key: 'group',
+            title: 'Group / Workplace',
+            detail: 'Bring All Care Plus to your team. Built for employers, clinics, schools, and community groups.'
         },
         {
-            title: 'Breathing & Choking Care',
-            detail: 'Manage choking and breathing emergencies across age groups until help arrives.'
-        },
-        {
-            title: 'Injury & Medical First Aid',
-            detail: 'Treat wounds, burns, fractures, allergic reactions, seizures, and diabetic emergencies.'
+            key: 'refresh',
+            title: 'Skills Refresh',
+            detail: 'Already certified? Stay sharp with rescuer readiness check-ins and confidence-building practice.'
         }
     ];
+
+    get moments() {
+        return [
+            {
+                key: 'home',
+                title: 'At home',
+                detail: 'Be ready for the people you love.',
+                image: this.media.family,
+                alt: 'People supporting one another at home'
+            },
+            {
+                key: 'work',
+                title: 'At work',
+                detail: 'Meet workplace safety expectations with confidence.',
+                image: this.media.work,
+                alt: 'Coworkers collaborating in a workplace'
+            },
+            {
+                key: 'community',
+                title: 'In community',
+                detail: 'Show up prepared when neighbors need help.',
+                image: this.media.community,
+                alt: 'Community volunteers supporting one another'
+            }
+        ];
+    }
 
     handleEnroll() {
         const path = this.enrollPath || '/enroll';

@@ -1,58 +1,134 @@
 <template>
-    <div class="home">
+    <div class="site">
         <section class="hero">
-            <div class="hero-copy">
+            <img class="hero-img" src={media.hero} alt="CPR training practice with hands-on coaching" />
+            <div class="hero-shade"></div>
+            <div class="hero-content">
                 <p class="brand">ALL CARE PLUS</p>
-                <h1>Safety Training</h1>
-                <p class="lede">CPR, AED, and First Aid training for ready rescuer — community members, workplaces, and families.</p>
+                <h1>Be ready for the moments that matter.</h1>
+                <p class="lede">CPR, AED, and First Aid training that helps you act with calm hands and a clear mind.</p>
                 <div class="cta-row">
                     <button class="cta" type="button" onclick={handleEnroll}>ENROLL NOW</button>
-                    <p class="cta-note">Takes a few minutes. Start your certification path today.</p>
-                </div>
-            </div>
-            <div class="hero-visual" aria-hidden="true">
-                <div class="pulse"></div>
-                <div class="badge">
-                    <strong>CPR · AED · First Aid</strong>
-                    <span>Nationally recognized readiness</span>
+                    <span class="cta-note">Classroom skills · Trusted agencies · Community-ready</span>
                 </div>
             </div>
         </section>
 
-        <section class="strip">
-            <div>
-                <strong>Volunteer-managed nonprofit</strong>
-                <span>Training that strengthens communities</span>
+        <nav class="course-bar" aria-label="Training focus">
+            <span>CPR</span>
+            <span>AED</span>
+            <span>First Aid</span>
+            <span>BLS</span>
+            <span>Workplace</span>
+            <span>Family &amp; Community</span>
+        </nav>
+
+        <section class="intro">
+            <div class="intro-copy">
+                <h2>Lifesaving training, built for real people</h2>
+                <p>
+                    Inspired by the clarity of national programs like the Red Cross — adapted for All Care Plus.
+                    You’ll practice the skills, hear the coaching, and leave ready to help at home, at work, and in your neighborhood.
+                </p>
+                <button class="cta cta-secondary" type="button" onclick={handleEnroll}>Take a CPR Class</button>
             </div>
-            <div>
-                <strong>Authorized provider pathways</strong>
-                <span>AHA · Red Cross · and more</span>
-            </div>
-            <div>
-                <strong>Self-care ready</strong>
-                <span>Build confidence beyond the classroom</span>
+            <div class="intro-photo">
+                <img src={media.team} alt="Care team prepared to respond together" />
             </div>
         </section>
 
-        <section class="competencies">
+        <section class="offerings">
             <div class="section-head">
-                <h2>What you’ll master</h2>
-                <p>Our First Aid &amp; CPR program builds the confidence to act quickly and care well.</p>
+                <h2>Choose your training path</h2>
+                <p>Clear options. Hands-on practice. Certification pathways through trusted agencies.</p>
             </div>
-            <div class="cards">
-                <template for:each={competencies} for:item="item">
-                    <article key={item.title}>
-                        <h3>{item.title}</h3>
-                        <p>{item.detail}</p>
+            <div class="offer-grid">
+                <template for:each={courses} for:item="course">
+                    <article key={course.key} class="offer">
+                        <img src={course.image} alt={course.alt} />
+                        <div class="offer-body">
+                            <h3>{course.title}</h3>
+                            <p>{course.detail}</p>
+                            <button class="text-link" type="button" onclick={handleEnroll}>Enroll in this path</button>
+                        </div>
                     </article>
                 </template>
             </div>
         </section>
 
+        <section class="formats">
+            <div class="section-head light">
+                <h2>How you’ll learn</h2>
+                <p>Pick the format that fits your life — then show up ready to practice.</p>
+            </div>
+            <div class="format-grid">
+                <template for:each={formats} for:item="format">
+                    <article key={format.key}>
+                        <h3>{format.title}</h3>
+                        <p>{format.detail}</p>
+                    </article>
+                </template>
+            </div>
+        </section>
+
+        <section class="expect">
+            <div class="expect-photo">
+                <img src={media.manikin} alt="Close-up of CPR practice during class" />
+            </div>
+            <div class="expect-copy">
+                <h2>What happens in class</h2>
+                <ul>
+                    <li>Recognize cardiac arrest and call for help with confidence</li>
+                    <li>Deliver high-quality chest compressions and rescue breaths</li>
+                    <li>Use an AED without hesitation</li>
+                    <li>Handle choking, bleeding, burns, and sudden medical emergencies</li>
+                    <li>Leave with a plan for the minutes before professionals arrive</li>
+                </ul>
+                <button class="cta" type="button" onclick={handleEnroll}>ENROLL NOW</button>
+            </div>
+        </section>
+
+        <section class="moments">
+            <div class="section-head">
+                <h2>Training that fits the way you live</h2>
+                <p>All Care Plus is a volunteer-managed nonprofit. We train people who want to protect their families, teams, and communities.</p>
+            </div>
+            <div class="moment-grid">
+                <template for:each={moments} for:item="moment">
+                    <figure key={moment.key}>
+                        <img src={moment.image} alt={moment.alt} />
+                        <figcaption>
+                            <strong>{moment.title}</strong>
+                            <span>{moment.detail}</span>
+                        </figcaption>
+                    </figure>
+                </template>
+            </div>
+        </section>
+
+        <section class="trust">
+            <div>
+                <strong>Authorized provider pathways</strong>
+                <span>American Heart Association · American Red Cross · and more</span>
+            </div>
+            <div>
+                <strong>Skills that stick</strong>
+                <span>Hands-on practice, not just slides</span>
+            </div>
+            <div>
+                <strong>Rescuer wellbeing</strong>
+                <span>Self-care support built into the All Care Plus journey</span>
+            </div>
+        </section>
+
         <section class="close">
-            <h2>Ready to join the next class?</h2>
-            <p>Enroll in minutes. Your responses help All Care Plus tailor training and advocate for rescuer wellbeing.</p>
-            <button class="cta" type="button" onclick={handleEnroll}>ENROLL NOW</button>
+            <img class="close-img" src={media.close} alt="Healthcare professional ready to help" />
+            <div class="close-shade"></div>
+            <div class="close-content">
+                <h2>Ready when it counts.</h2>
+                <p>Enroll in All Care Plus Safety Training and build the confidence to act.</p>
+                <button class="cta" type="button" onclick={handleEnroll}>ENROLL NOW</button>
+            </div>
         </section>
     </div>
 </template>

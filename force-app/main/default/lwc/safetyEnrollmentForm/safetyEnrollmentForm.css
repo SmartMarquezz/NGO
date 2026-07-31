@@ -1,13 +1,13 @@
 :host {
-    --acp-ink: #0f2a3a;
-    --acp-muted: #4d6675;
+    --acp-ink: #13253a;
+    --acp-muted: #5a6b7a;
     --acp-teal: #1aa6a0;
     --acp-teal-deep: #0f7f7a;
     --acp-sky: #2f6fed;
-    --acp-coral: #e36b3c;
-    --acp-wash: #e8f3f4;
-    --acp-card: rgba(255, 255, 255, 0.94);
-    --acp-line: #c9dde1;
+    --acp-coral: #d6452f;
+    --acp-wash: #f7f4ef;
+    --acp-card: rgba(255, 255, 255, 0.96);
+    --acp-line: #ddd4c8;
     display: block;
     font-family: "Source Sans 3", "Segoe UI", sans-serif;
 }
@@ -17,17 +17,14 @@
     margin: 0 auto;
     padding: 1.25rem 1rem 2.5rem;
     color: var(--acp-ink);
-    background:
-        radial-gradient(circle at 12% 8%, rgba(26, 166, 160, 0.18), transparent 36%),
-        radial-gradient(circle at 88% 0%, rgba(47, 111, 237, 0.14), transparent 30%),
-        linear-gradient(180deg, #f4fbfb 0%, #eef4f8 55%, #f7fafc 100%);
     min-height: 100%;
-    border-radius: 1rem;
+    border-radius: 0;
 }
 
 .acp-hero {
     margin-bottom: 1.25rem;
     animation: acp-rise 520ms ease-out;
+    color: #fff;
 }
 
 .acp-brand {
@@ -35,7 +32,7 @@
     letter-spacing: 0.18em;
     font-size: 0.8rem;
     font-weight: 700;
-    color: var(--acp-teal-deep);
+    color: #9fe7e1;
     margin-bottom: 0.35rem;
 }
 
@@ -45,12 +42,12 @@
     font-size: clamp(1.9rem, 4vw, 2.6rem);
     line-height: 1.05;
     font-weight: 700;
-    color: var(--acp-ink);
+    color: #fff;
 }
 
 .acp-hero p {
     margin: 0.5rem 0 0;
-    color: var(--acp-muted);
+    color: rgba(255, 255, 255, 0.9);
     max-width: 34rem;
 }
 
@@ -256,7 +253,7 @@
 }
 
 .acp-btn-primary {
-    background: linear-gradient(135deg, var(--acp-teal), var(--acp-sky));
+    background: #d6452f;
     color: #fff;
     border-color: transparent;
 }

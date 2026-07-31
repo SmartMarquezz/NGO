@@ -1,7 +1,7 @@
 /*
  * All Care Plus Safety Training global styles
  */
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Source+Sans+3:wght@400;600;700;800&display=swap');
 
 html,
 body {
@@ -9,15 +9,15 @@ body {
 }
 
 html {
-    background: #f3f8f9;
+    background: #f7f4ef;
 }
 
 body {
     margin: 0;
     font-family: "Source Sans 3", "Segoe UI", sans-serif;
-    color: #0f2a3a;
+    color: #13253a;
 }
 
 a {
-    color: #1aa6a0;
+    color: #d6452f;
 }

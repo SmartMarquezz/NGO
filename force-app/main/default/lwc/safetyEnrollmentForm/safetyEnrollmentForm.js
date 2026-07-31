@@ -1,6 +1,7 @@
 import { LightningElement, api, track } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import submitEnrollment from '@salesforce/apex/SafetyEnrollmentController.submitEnrollment';
+import MEDIA from '@salesforce/resourceUrl/acpTrainingMedia';
 
 const TOTAL_PAGES = 5;
 
@@ -12,6 +13,12 @@ const STATE_OPTIONS = [
 
 export default class SafetyEnrollmentForm extends LightningElement {
     @api headline = 'Safety Training Enrollment';
+
+    formBackdrop = `linear-gradient(180deg, rgba(19, 37, 58, 0.62), rgba(19, 37, 58, 0.42)), url(${MEDIA}/acpTrainingMedia/cpr.jpg) center/cover fixed`;
+
+    get formStyle() {
+        return `background:${this.formBackdrop}`;
+    }
 
     @track currentPage = 1;
     @track isSubmitting = false;
