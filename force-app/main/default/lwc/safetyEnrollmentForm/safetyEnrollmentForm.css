@@ -54,6 +54,15 @@
     max-width: 34rem;
 }
 
+.acp-error {
+    background: #fff1f1;
+    border: 1px solid #f0c2c2;
+    color: #9b1c1c;
+    border-radius: 0.75rem;
+    padding: 0.85rem 1rem;
+    margin-bottom: 0.85rem;
+}
+
 .acp-card,
 .acp-banner,
 .acp-complete {

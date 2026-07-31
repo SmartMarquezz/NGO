@@ -1,0 +1,69 @@
+{
+  "type" : "sfdc_cms__view",
+  "title" : "Enroll",
+  "contentBody" : {
+    "component" : {
+      "children" : [ {
+        "children" : [ {
+          "attributes" : {
+            "backgroundImageConfig" : "",
+            "backgroundImageOverlay" : "rgba(0,0,0,0)",
+            "componentSpacerSize" : "",
+            "layoutDirectionDesktop" : "row",
+            "layoutDirectionMobile" : "column",
+            "layoutDirectionTablet" : "column",
+            "maxContentWidth" : "",
+            "sectionColumnGutterWidth" : "",
+            "sectionConfig" : "{\"UUID\":\"2b903d74-fd7a-48df-b84c-18637a145001\",\"columns\":[{\"UUID\":\"9c2ff946-c96a-423d-aee9-1d85154352c9\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":null}]}",
+            "sectionMinHeight" : "",
+            "sectionVerticalAlign" : "flex-start"
+          },
+          "children" : [ {
+            "children" : [ {
+              "attributes" : {
+                "headline" : "Safety Training Enrollment"
+              },
+              "definition" : "c:safetyEnrollmentForm",
+              "id" : "d70d4fcb-472c-47e3-bdc5-6fd1871c9abc",
+              "type" : "component"
+            } ],
+            "id" : "9c2ff946-c96a-423d-aee9-1d85154352c9",
+            "name" : "col1",
+            "title" : "Column 1",
+            "type" : "region"
+          } ],
+          "definition" : "community_layout:section",
+          "id" : "2b903d74-fd7a-48df-b84c-18637a145001",
+          "type" : "component"
+        } ],
+        "id" : "54a5bd8c-cca6-44fa-ad88-d4bf7af85c72",
+        "name" : "content",
+        "title" : "Content",
+        "type" : "region"
+      }, {
+        "children" : [ {
+          "attributes" : {
+            "customHeadTags" : "",
+            "description" : "Enroll in All Care Plus CPR Safety Training",
+            "pageTitle" : "Enroll Now | All Care Plus Safety Training",
+            "recordId" : "{!recordId}"
+          },
+          "definition" : "community_builder:seoAssistant",
+          "id" : "2e316263-14c3-4f46-9253-c2102e790971",
+          "type" : "component"
+        } ],
+        "id" : "d6a81601-ce5b-4602-a610-6402f5aa0485",
+        "name" : "sfdcHiddenRegion",
+        "title" : "sfdcHiddenRegion",
+        "type" : "region"
+      } ],
+      "definition" : "community_layout:sldsFlexibleLayout",
+      "id" : "34962524-8075-441d-9d49-810bf9065bb3",
+      "type" : "component"
+    },
+    "dataProviders" : [ ],
+    "themeLayoutType" : "Inner",
+    "viewType" : "custom-enroll"
+  },
+  "urlName" : "enroll"
+}

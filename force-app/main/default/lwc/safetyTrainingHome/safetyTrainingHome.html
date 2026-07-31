@@ -1,0 +1,58 @@
+<template>
+    <div class="home">
+        <section class="hero">
+            <div class="hero-copy">
+                <p class="brand">ALL CARE PLUS</p>
+                <h1>Safety Training</h1>
+                <p class="lede">CPR, AED, and First Aid training for ready rescuer — community members, workplaces, and families.</p>
+                <div class="cta-row">
+                    <button class="cta" type="button" onclick={handleEnroll}>ENROLL NOW</button>
+                    <p class="cta-note">Takes a few minutes. Start your certification path today.</p>
+                </div>
+            </div>
+            <div class="hero-visual" aria-hidden="true">
+                <div class="pulse"></div>
+                <div class="badge">
+                    <strong>CPR · AED · First Aid</strong>
+                    <span>Nationally recognized readiness</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="strip">
+            <div>
+                <strong>Volunteer-managed nonprofit</strong>
+                <span>Training that strengthens communities</span>
+            </div>
+            <div>
+                <strong>Authorized provider pathways</strong>
+                <span>AHA · Red Cross · and more</span>
+            </div>
+            <div>
+                <strong>Self-care ready</strong>
+                <span>Build confidence beyond the classroom</span>
+            </div>
+        </section>
+
+        <section class="competencies">
+            <div class="section-head">
+                <h2>What you’ll master</h2>
+                <p>Our First Aid &amp; CPR program builds the confidence to act quickly and care well.</p>
+            </div>
+            <div class="cards">
+                <template for:each={competencies} for:item="item">
+                    <article key={item.title}>
+                        <h3>{item.title}</h3>
+                        <p>{item.detail}</p>
+                    </article>
+                </template>
+            </div>
+        </section>
+
+        <section class="close">
+            <h2>Ready to join the next class?</h2>
+            <p>Enroll in minutes. Your responses help All Care Plus tailor training and advocate for rescuer wellbeing.</p>
+            <button class="cta" type="button" onclick={handleEnroll}>ENROLL NOW</button>
+        </section>
+    </div>
+</template>

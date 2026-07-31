@@ -1,0 +1,23 @@
+/*
+ * All Care Plus Safety Training global styles
+ */
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap');
+
+html,
+body {
+    height: 100%;
+}
+
+html {
+    background: #f3f8f9;
+}
+
+body {
+    margin: 0;
+    font-family: "Source Sans 3", "Segoe UI", sans-serif;
+    color: #0f2a3a;
+}
+
+a {
+    color: #1aa6a0;
+}

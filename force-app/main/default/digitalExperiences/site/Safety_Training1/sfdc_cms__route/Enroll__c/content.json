@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "Enroll",
+  "contentBody" : {
+    "activeViewId" : "enroll",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "custom-enroll",
+    "urlPrefix" : "enroll"
+  },
+  "urlName" : "enroll"
+}

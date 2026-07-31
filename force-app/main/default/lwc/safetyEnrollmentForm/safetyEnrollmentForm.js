@@ -17,6 +17,7 @@ export default class SafetyEnrollmentForm extends LightningElement {
     @track isSubmitting = false;
     @track isComplete = false;
     @track enrollmentNumber;
+    @track submitError;
     @track form = this.emptyForm();
 
     get stateOptions() {
@@ -333,6 +334,11 @@ export default class SafetyEnrollmentForm extends LightningElement {
     }
 
     toast(message, variant) {
-        this.dispatchEvent(new ShowToastEvent({ title: 'All Care Plus', message, variant }));
+        this.submitError = variant === 'error' ? message : null;
+        try {
+            this.dispatchEvent(new ShowToastEvent({ title: 'All Care Plus', message, variant }));
+        } catch (e) {
+            // Guest Experience Cloud users may not support toasts
+        }
     }
 }

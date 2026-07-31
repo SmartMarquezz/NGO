@@ -6,6 +6,10 @@
             <p>CPR &amp; Safety Training registration — your path to confident, ready care.</p>
         </header>
 
+        <template if:true={submitError}>
+            <div class="acp-error" role="alert">{submitError}</div>
+        </template>
+
         <template if:true={isComplete}>
             <section class="acp-card acp-complete">
                 <div class="acp-section-label">Let's get your training started!</div>

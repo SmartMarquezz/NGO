@@ -1,0 +1,69 @@
+{
+  "type" : "sfdc_cms__view",
+  "title" : "Home",
+  "contentBody" : {
+    "component" : {
+      "children" : [ {
+        "children" : [ {
+          "attributes" : {
+            "backgroundImageConfig" : "",
+            "backgroundImageOverlay" : "rgba(0,0,0,0)",
+            "componentSpacerSize" : "",
+            "layoutDirectionDesktop" : "row",
+            "layoutDirectionMobile" : "column",
+            "layoutDirectionTablet" : "column",
+            "maxContentWidth" : "",
+            "sectionColumnGutterWidth" : "",
+            "sectionConfig" : "{\"UUID\":\"863c9009-e225-46de-8ba8-bd112f4678a9\",\"columns\":[{\"UUID\":\"0f67f1c8-8ed2-4f98-a8a2-f5501627183e\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":null}]}",
+            "sectionMinHeight" : "",
+            "sectionVerticalAlign" : "flex-start"
+          },
+          "children" : [ {
+            "children" : [ {
+              "attributes" : {
+                "enrollPath" : "/enroll"
+              },
+              "definition" : "c:safetyTrainingHome",
+              "id" : "ddfe25fd-6a87-4e06-a5d1-34fc27659a1e",
+              "type" : "component"
+            } ],
+            "id" : "0f67f1c8-8ed2-4f98-a8a2-f5501627183e",
+            "name" : "col1",
+            "title" : "Column 1",
+            "type" : "region"
+          } ],
+          "definition" : "community_layout:section",
+          "id" : "863c9009-e225-46de-8ba8-bd112f4678a9",
+          "type" : "component"
+        } ],
+        "id" : "723d0ab8-28a9-4405-84a7-94921328889b",
+        "name" : "content",
+        "title" : "Content",
+        "type" : "region"
+      }, {
+        "children" : [ {
+          "attributes" : {
+            "customHeadTags" : "",
+            "description" : "All Care Plus CPR, AED, and First Aid Safety Training enrollment",
+            "pageTitle" : "All Care Plus | Safety Training",
+            "recordId" : "{!recordId}"
+          },
+          "definition" : "community_builder:seoAssistant",
+          "id" : "8e53e64c-e16c-4bb9-97c3-d7851ed0a46e",
+          "type" : "component"
+        } ],
+        "id" : "38191572-de7f-4b45-9905-a7abe0d18a5f",
+        "name" : "sfdcHiddenRegion",
+        "title" : "sfdcHiddenRegion",
+        "type" : "region"
+      } ],
+      "definition" : "community_layout:sldsFlexibleLayout",
+      "id" : "947a2aeb-b351-40f8-972c-7036070b08b7",
+      "type" : "component"
+    },
+    "dataProviders" : [ ],
+    "themeLayoutType" : "Inner",
+    "viewType" : "home"
+  },
+  "urlName" : "home"
+}
