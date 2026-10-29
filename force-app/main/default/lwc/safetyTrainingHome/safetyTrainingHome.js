@@ -18,6 +18,73 @@ export default class SafetyTrainingHome extends LightningElement {
         resources: `${M}/img_handshake_sun.jpg`
     };
 
+    upcomingSessions = [
+        {
+            key: 'u1',
+            when: 'Sat · Nov 8 · 9:00 AM PT',
+            title: 'Adult & Pediatric First Aid / CPR / AED',
+            detail: 'In-person · Palo Alto · max 10 seats',
+            agency: 'American Red Cross path',
+            registerUrl: ENROLLWARE_CALENDAR
+        },
+        {
+            key: 'u2',
+            when: 'Wed · Nov 19 · 4:30 PM PT',
+            title: 'Basic Life Support (BLS)',
+            detail: 'Blended skills session · healthcare / clinical',
+            agency: 'American Heart Association BLS',
+            registerUrl: ENROLLWARE_CALENDAR
+        },
+        {
+            key: 'u3',
+            when: 'Sat · Dec 6 · 10:00 AM PT',
+            title: 'Adult CPR / AED',
+            detail: 'In-person · community & workplace',
+            agency: 'American Red Cross option available',
+            registerUrl: ENROLLWARE_CALENDAR
+        },
+        {
+            key: 'u4',
+            when: 'Wed · Dec 17 · 5:00 PM PT',
+            title: 'Adult & Pediatric CPR / AED',
+            detail: 'Evening session · open enrollment',
+            agency: 'American Red Cross / AHA paths',
+            registerUrl: ENROLLWARE_CALENDAR
+        },
+        {
+            key: 'u5',
+            when: 'Sat · Jan 10 · 9:00 AM PT',
+            title: 'Adult First Aid / CPR / AED',
+            detail: 'In-person · open enrollment',
+            agency: 'American Red Cross path',
+            registerUrl: ENROLLWARE_CALENDAR
+        },
+        {
+            key: 'u6',
+            when: 'Sat · Jan 24 · 10:00 AM PT',
+            title: 'First Aid',
+            detail: 'In-person · schools & workplaces',
+            agency: 'American Red Cross First Aid',
+            registerUrl: ENROLLWARE_CALENDAR
+        },
+        {
+            key: 'u7',
+            when: 'Sat · Feb 7 · 9:00 AM PT',
+            title: 'Adult & Pediatric First Aid / CPR / AED',
+            detail: 'In-person · Palo Alto',
+            agency: 'American Red Cross / HeartSaver',
+            registerUrl: ENROLLWARE_CALENDAR
+        },
+        {
+            key: 'u8',
+            when: 'Wed · Feb 18 · 4:30 PM PT',
+            title: 'Basic Life Support (BLS)',
+            detail: 'Blended skills · healthcare / clinical',
+            agency: 'American Heart Association BLS',
+            registerUrl: ENROLLWARE_CALENDAR
+        }
+    ];
+
     get classes() {
         return [
             {
@@ -39,7 +106,7 @@ export default class SafetyTrainingHome extends LightningElement {
                 format: 'In-person or blended',
                 length: 'Typically half-day depending on format',
                 includes: 'First aid + CPR + AED for adults and children',
-                note: 'Best all-around option when your workplace or school asks for First Aid with CPR/AED.',
+                note: 'American Red Cross and HeartSaver-style paths for workplaces and schools that need First Aid with CPR/AED.',
                 image: `${M}/img_firstaid_bag.jpg`,
                 alt: 'Adult and Pediatric First Aid CPR AED',
                 enrollwareUrl: ENROLLWARE_CALENDAR
@@ -51,7 +118,7 @@ export default class SafetyTrainingHome extends LightningElement {
                 format: 'In-person or blended',
                 length: 'Typically half-day depending on format',
                 includes: 'Adult first aid, CPR, and AED skills',
-                note: 'Choose this when pediatric content is not required.',
+                note: 'Choose this when pediatric content is not required. American Red Cross options available.',
                 image: `${M}/img_aed_ready.jpg`,
                 alt: 'Adult First Aid CPR AED',
                 enrollwareUrl: ENROLLWARE_CALENDAR
@@ -87,7 +154,7 @@ export default class SafetyTrainingHome extends LightningElement {
                 format: 'In-person or blended',
                 length: 'Course length varies by agency and format',
                 includes: 'Bleeding, burns, medical emergencies, and everyday first aid skills',
-                note: 'Essential first aid skills for everyday emergencies. Can pair with CPR when required.',
+                note: 'Essential first aid skills for everyday emergencies. Can pair with CPR when required. American Red Cross First Aid available.',
                 image: `${M}/img_fa_only.jpg`,
                 alt: 'First Aid class',
                 enrollwareUrl: ENROLLWARE_CALENDAR

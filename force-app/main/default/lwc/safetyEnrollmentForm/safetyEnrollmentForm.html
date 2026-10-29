@@ -65,15 +65,26 @@
                                     <a href="https://allcareplus.enrollware.com/calendar" target="_blank" rel="noopener noreferrer"
                                         >class calendar</a
                                     >
-                                    to pick a time and register. Or tell us a little here and we’ll recommend a class.
+                                    (Pacific Time). After you register, return here for next steps. Or leave contact
+                                    details and we’ll recommend a class.
                                 </p>
-                                <label class="full">
-                                    <span>Full name</span>
+                                <label>
+                                    <span>First name</span>
                                     <input
                                         type="text"
-                                        name="fullName"
+                                        name="firstName"
                                         required
-                                        value={inquiry.fullName}
+                                        value={inquiry.firstName}
+                                        onchange={handleText}
+                                    />
+                                </label>
+                                <label>
+                                    <span>Last name</span>
+                                    <input
+                                        type="text"
+                                        name="lastName"
+                                        required
+                                        value={inquiry.lastName}
                                         onchange={handleText}
                                     />
                                 </label>
@@ -82,52 +93,35 @@
                                     <input type="email" name="email" required value={inquiry.email} onchange={handleText} />
                                 </label>
                                 <label>
-                                    <span>Mobile phone</span>
+                                    <span>Phone</span>
                                     <input type="tel" name="phone" required value={inquiry.phone} onchange={handleText} />
                                 </label>
-
-                                <fieldset>
-                                    <legend>Which class are you closest to? (pick one or Not sure)</legend>
-                                    <template for:each={classInterestChoices} for:item="opt">
-                                        <label key={opt.value} class="choice">
-                                            <input
-                                                type="checkbox"
-                                                name="classInterests"
-                                                value={opt.value}
-                                                checked={opt.checked}
-                                                onchange={handleMulti}
-                                            />
-                                            <span>{opt.label}</span>
-                                        </label>
-                                    </template>
-                                </fieldset>
-
-                                <fieldset>
-                                    <legend>Preferred format</legend>
-                                    <template for:each={deliveryChoices} for:item="opt">
-                                        <label key={opt.value} class="choice">
-                                            <input
-                                                type="radio"
-                                                name="deliveryOption"
-                                                value={opt.value}
-                                                checked={opt.checked}
-                                                onchange={handleRadio}
-                                                required
-                                            />
-                                            <span>{opt.label}</span>
-                                        </label>
-                                    </template>
-                                </fieldset>
-
-                                <label class="full">
-                                    <span>Anything else? (optional)</span>
-                                    <textarea
-                                        name="additionalDetails"
-                                        rows="2"
-                                        value={inquiry.additionalDetails}
+                                <label>
+                                    <span>Organization (optional)</span>
+                                    <input
+                                        type="text"
+                                        name="organization"
+                                        value={inquiry.organization}
                                         onchange={handleText}
-                                        placeholder="Deadline, group size, workplace requirement…"
-                                    ></textarea>
+                                    />
+                                </label>
+                                <label>
+                                    <span>Title (optional)</span>
+                                    <input type="text" name="title" value={inquiry.title} onchange={handleText} />
+                                </label>
+                                <label class="full">
+                                    <span>Which class? (optional — or Not sure)</span>
+                                    <select name="classPick" value={inquiry.classPick} onchange={handleText}>
+                                        <option value="">Not sure — please recommend</option>
+                                        <option value="Basic Life Support (BLS)">Basic Life Support (BLS)</option>
+                                        <option value="Adult & Pediatric First Aid / CPR / AED"
+                                            >Adult &amp; Pediatric First Aid / CPR / AED</option
+                                        >
+                                        <option value="Adult First Aid / CPR / AED">Adult First Aid / CPR / AED</option>
+                                        <option value="Adult CPR / AED">Adult CPR / AED</option>
+                                        <option value="First Aid only">First Aid only</option>
+                                        <option value="American Red Cross course">American Red Cross course</option>
+                                    </select>
                                 </label>
 
                                 <template if:true={submitError}>
@@ -176,7 +170,7 @@
                                 </fieldset>
 
                                 <fieldset>
-                                    <legend>Select class (AHA / ECSI seat inventory first)</legend>
+                                    <legend>Select class (AHA / American Red Cross / ECSI inventory)</legend>
                                     <template if:true={loadingOfferings}>
                                         <p class="help">Loading available classes…</p>
                                     </template>

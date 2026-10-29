@@ -183,6 +183,74 @@
     justify-items: start;
 }
 
+.upcoming {
+    padding: clamp(1.6rem, 4vw, 2.6rem) clamp(1.2rem, 5vw, 4rem);
+    background: #fff;
+    border-bottom: 1px solid var(--line);
+}
+
+.upcoming-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.upcoming-grid article {
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+    padding: 1.1rem 1.05rem 1.2rem;
+    display: grid;
+    gap: 0.4rem;
+    align-content: start;
+    background:
+        radial-gradient(circle at 100% 0%, rgba(234, 149, 93, 0.12), transparent 42%),
+        #fff;
+}
+
+.upcoming-grid .when {
+    margin: 0;
+    color: var(--gold-deep);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.upcoming-grid h3 {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.upcoming-grid p {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.45;
+    font-size: 0.92rem;
+}
+
+.upcoming-grid .agency {
+    color: var(--navy);
+    font-weight: 600;
+    font-size: 0.86rem;
+}
+
+.cta.compact {
+    margin-top: 0.35rem;
+    min-height: 2.6rem;
+    padding: 0.7rem 1.15rem;
+    font-size: 0.92rem;
+    width: fit-content;
+}
+
+.upcoming-note {
+    margin: 1.1rem 0 0;
+    color: var(--muted);
+    line-height: 1.5;
+    max-width: 46rem;
+}
+
 .guide {
     background: var(--cream);
 }
@@ -342,8 +410,8 @@
 
 .option-grid img {
     width: 100%;
-    aspect-ratio: 16 / 9;
-    max-height: 7.5rem;
+    aspect-ratio: 1;
+    max-height: none;
     object-fit: cover;
 }
 
@@ -391,8 +459,8 @@
 .shot img,
 .class-grid img {
     width: 100%;
-    aspect-ratio: 16 / 9;
-    max-height: 8.5rem;
+    aspect-ratio: 1;
+    max-height: none;
     object-fit: cover;
     display: block;
     transition: transform 0.5s ease;
@@ -497,8 +565,8 @@
 
 .resources img {
     width: 100%;
-    border-radius: 1.4rem 0.3rem 1.4rem 0.3rem;
-    aspect-ratio: 4 / 5;
+    border-radius: 1.1rem;
+    aspect-ratio: 1;
     object-fit: cover;
 }
 
@@ -523,6 +591,7 @@
     .option-grid-4,
     .guide-grid,
     .class-grid,
+    .upcoming-grid,
     .resources {
         grid-template-columns: 1fr;
     }
@@ -534,7 +603,8 @@
 
 @media (max-width: 1100px) and (min-width: 901px) {
     .option-grid-4,
-    .guide-grid {
+    .guide-grid,
+    .upcoming-grid {
         grid-template-columns: 1fr 1fr;
     }
 }

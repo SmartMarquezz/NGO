@@ -7,41 +7,55 @@
             <div class="hero-shade"></div>
             <div class="hero-copy">
                 <p class="eyebrow">STORE</p>
-                <h1>Books and training supplies that support the work.</h1>
+                <h1>Books and supplies that support the work.</h1>
                 <p>
-                    Manuals and class kits ship from here. Class seats with AHA / ECSI inventory live on registration.
-                    Red Cross options can sell in real time without seat inventory.
+                    Organized by focus: nutrition, mindfulness, and safety training. Many items ship via drop-ship so
+                    we can keep the catalog light. American Red Cross options can sell without seat inventory; AHA /
+                    ECSI class seats still live on registration.
                 </p>
             </div>
         </section>
 
-        <section class="catalog reveal" data-reveal>
-            <p class="eyebrow dark">FEATURED ITEMS</p>
-            <h2>Ready for purchase</h2>
-            <div class="grid">
-                <template for:each={products} for:item="item">
-                    <article key={item.key}>
-                        <img src={item.image} alt={item.alt} />
-                        <div>
-                            <p class="type">{item.type}</p>
-                            <h3>{item.title}</h3>
-                            <p>{item.summary}</p>
-                            <p class="price">{item.price}</p>
-                            <button
-                                class="cta"
-                                type="button"
-                                data-path={item.path}
-                                data-external={item.external}
-                                onclick={handlePath}
-                            >
-                                {item.cta}
-                            </button>
-                        </div>
-                    </article>
-                </template>
-            </div>
+        <nav class="jump" aria-label="Store sections">
+            <a href="#nutrition">Nutrition</a>
+            <a href="#mindfulness">Mindfulness</a>
+            <a href="#safety">Safety training</a>
+        </nav>
+
+        <template for:each={sections} for:item="section">
+            <section key={section.key} class="catalog reveal" data-reveal id={section.key}>
+                <p class="eyebrow dark">{section.eyebrow}</p>
+                <h2>{section.title}</h2>
+                <p class="lead">{section.lead}</p>
+                <div class="grid">
+                    <template for:each={section.items} for:item="item">
+                        <article key={item.key}>
+                            <img src={item.image} alt={item.alt} />
+                            <div>
+                                <p class="type">{item.type}</p>
+                                <h3>{item.title}</h3>
+                                <p>{item.summary}</p>
+                                <p class="price">{item.price}</p>
+                                <button
+                                    class="cta"
+                                    type="button"
+                                    data-path={item.path}
+                                    data-external={item.external}
+                                    onclick={handlePath}
+                                >
+                                    {item.cta}
+                                </button>
+                            </div>
+                        </article>
+                    </template>
+                </div>
+            </section>
+        </template>
+
+        <section class="catalog note-band">
             <p class="note">
-                QuickBooks payment links on Training Offering records power Buy buttons automatically once pasted in.
+                QuickBooks payment links on Training Offering records power Buy buttons once pasted in. Until then,
+                Ask to purchase routes to Contact.
             </p>
         </section>
 

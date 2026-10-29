@@ -309,7 +309,7 @@
 
 .media-frame img {
     width: 100%;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 1;
     max-height: 8.25rem;
     object-fit: cover;
     display: block;
@@ -426,8 +426,8 @@
 .skills-visual img {
     width: 100%;
     border-radius: 1.1rem;
-    aspect-ratio: 16 / 11;
-    max-height: 18rem;
+    aspect-ratio: 1;
+    max-height: 22rem;
     object-fit: cover;
     display: block;
     filter: saturate(1.06) sepia(0.1);
@@ -623,8 +623,8 @@
 
 .together-media img {
     width: 100%;
-    aspect-ratio: 16 / 11;
-    max-height: 16rem;
+    aspect-ratio: 1;
+    max-height: 20rem;
     object-fit: cover;
     display: block;
     transition: transform 0.7s ease;

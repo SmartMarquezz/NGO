@@ -257,7 +257,7 @@
 .shot { overflow: hidden; }
 .area-grid img {
     width: 100%;
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 1;
     object-fit: cover;
     transition: transform 0.5s ease;
 }
@@ -283,7 +283,7 @@
 .alone img {
     width: 100%;
     border-radius: 1.4rem 0.3rem 1.4rem 0.3rem;
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 1;
     object-fit: cover;
 }
 

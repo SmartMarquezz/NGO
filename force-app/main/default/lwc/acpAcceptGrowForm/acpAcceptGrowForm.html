@@ -6,7 +6,7 @@
             <div class="visual-copy">
                 <p class="eyebrow">ACCEPT &amp; GROW</p>
                 <h2>Quick signup. We’ll follow up fast.</h2>
-                <p>Name, contact, and what you need — that’s enough to get started.</p>
+                <p>Minimum contact details only — enough to pre-qualify and reach you.</p>
             </div>
         </aside>
 
@@ -14,22 +14,20 @@
             <header class="intro">
                 <h2>{introTitle}</h2>
                 <p>
-                    Short pre-qual so we can place you in the right path. Crisis support: call/text
-                    <strong>988</strong>.
+                    Short signup for ads and partner links. Crisis support: call/text <strong>988</strong>.
                 </p>
             </header>
 
             <template if:true={isComplete}>
                 <div class="success" role="status">
-                    Thank you — we’ve received your Accept &amp; Grow signup. Our team will follow up within 24–48 hours
-                    with next steps.
+                    Thank you — we’ve received your Accept &amp; Grow signup. Our team will follow up within 24–48 hours.
                 </div>
             </template>
 
             <template if:false={isComplete}>
                 <form class="form" onsubmit={handleSubmit}>
                     <fieldset>
-                        <legend>What do you want to sign up for?</legend>
+                        <legend>What do you want?</legend>
                         <template for:each={interestChoices} for:item="opt">
                             <label key={opt.value} class="choice">
                                 <input
@@ -46,38 +44,32 @@
                     </fieldset>
 
                     <label>
-                        <span>Full name</span>
-                        <input type="text" name="participantName" required value={participantName} onchange={handleText} />
+                        <span>First name</span>
+                        <input type="text" name="firstName" required value={firstName} onchange={handleText} />
+                    </label>
+                    <label>
+                        <span>Last name</span>
+                        <input type="text" name="lastName" required value={lastName} onchange={handleText} />
                     </label>
                     <label>
                         <span>Email</span>
                         <input type="email" name="email" required value={email} onchange={handleText} />
                     </label>
                     <label>
-                        <span>Mobile phone</span>
+                        <span>Phone</span>
                         <input type="tel" name="phone" required value={phone} onchange={handleText} />
                     </label>
-
-                    <fieldset>
-                        <legend>How soon?</legend>
-                        <template for:each={urgencyChoices} for:item="opt">
-                            <label key={opt.value} class="choice">
-                                <input
-                                    type="radio"
-                                    name="urgency"
-                                    value={opt.value}
-                                    checked={opt.checked}
-                                    onchange={handleRadio}
-                                    required
-                                />
-                                <span>{opt.label}</span>
-                            </label>
-                        </template>
-                    </fieldset>
-
+                    <label>
+                        <span>Organization (optional)</span>
+                        <input type="text" name="organization" value={organization} onchange={handleText} />
+                    </label>
+                    <label>
+                        <span>Title (optional)</span>
+                        <input type="text" name="title" value={title} onchange={handleText} />
+                    </label>
                     <label class="full">
-                        <span>Anything we should know? (optional)</span>
-                        <textarea name="notes" rows="3" value={notes} onchange={handleText}></textarea>
+                        <span>Service location / city (optional)</span>
+                        <input type="text" name="location" value={location} onchange={handleText} />
                     </label>
 
                     <label class="choice full">

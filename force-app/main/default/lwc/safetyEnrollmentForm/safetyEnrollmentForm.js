@@ -111,15 +111,20 @@ export default class SafetyEnrollmentForm extends LightningElement {
 
     emptyInquiryForm() {
         return {
+            firstName: '',
+            lastName: '',
             fullName: '',
             email: '',
             phone: '',
-            preferredContact: '',
+            organization: '',
+            title: '',
+            classPick: '',
+            preferredContact: 'Email',
             classInterests: [],
             reasons: [],
-            deliveryOption: '',
-            experienceLevel: '',
-            timingNeed: '',
+            deliveryOption: 'In-Person (Instructor Led)',
+            experienceLevel: 'Not sure',
+            timingNeed: 'Flexible / exploring options',
             groupName: '',
             additionalDetails: ''
         };
@@ -147,7 +152,7 @@ export default class SafetyEnrollmentForm extends LightningElement {
 
     get visualCopy() {
         return this.isInquiryMode
-            ? 'A few questions help us recommend BLS, HeartSaver, First Aid, adult vs pediatric, and the best format.'
+            ? 'A few questions help us recommend BLS, HeartSaver, American Red Cross, First Aid, adult vs pediatric, and the best format.'
             : 'Pick your class, hold inventory in Salesforce, then finish payment on QuickBooks.';
     }
 
@@ -263,26 +268,19 @@ export default class SafetyEnrollmentForm extends LightningElement {
         event.preventDefault();
         this.submitError = '';
         if (this.isInquiryMode) {
-            if (!(this.inquiry.classInterests || []).length) {
-                this.submitError = 'Please select at least one class type (or Not sure).';
-                return;
-            }
-            // Pre-qual only — reasons/timing optional to reduce friction
-            if (!(this.inquiry.reasons || []).length) {
-                this.inquiry = { ...this.inquiry, reasons: ['Need recommendation'] };
-            }
-            if (!this.inquiry.preferredContact) {
-                this.inquiry = { ...this.inquiry, preferredContact: 'Email' };
-            }
-            if (!this.inquiry.experienceLevel) {
-                this.inquiry = { ...this.inquiry, experienceLevel: 'Not sure' };
-            }
-            if (!this.inquiry.timingNeed) {
-                this.inquiry = { ...this.inquiry, timingNeed: 'Flexible' };
-            }
-            if (!this.inquiry.groupName) {
-                this.inquiry = { ...this.inquiry, groupName: 'Individual' };
-            }
+            const fullName = `${this.inquiry.firstName || ''} ${this.inquiry.lastName || ''}`.trim();
+            const classPick = this.inquiry.classPick || 'Not sure - please recommend';
+            this.inquiry = {
+                ...this.inquiry,
+                fullName,
+                classInterests: [classPick],
+                reasons: ['Need recommendation'],
+                preferredContact: 'Email',
+                experienceLevel: 'Not sure',
+                timingNeed: 'Flexible / exploring options',
+                groupName: this.inquiry.organization || 'Individual',
+                deliveryOption: this.inquiry.deliveryOption || 'In-Person (Instructor Led)'
+            };
         }
         this.isSubmitting = true;
         try {
@@ -304,20 +302,19 @@ export default class SafetyEnrollmentForm extends LightningElement {
 
     async submitInquiryForm() {
         const payload = {
+            firstName: this.inquiry.firstName,
+            lastName: this.inquiry.lastName,
             fullName: this.inquiry.fullName,
             email: this.inquiry.email,
             phone: this.inquiry.phone,
-            preferredContact: this.inquiry.preferredContact,
+            preferredContact: 'Email',
             interestAreas: this.inquiry.classInterests,
-            availability: [
-                this.inquiry.deliveryOption,
-                this.inquiry.experienceLevel,
-                this.inquiry.timingNeed
-            ].filter(Boolean),
+            availability: ['Pacific Time schedule'],
             focusAreas: this.inquiry.reasons,
             additionalDetails: [
-                this.inquiry.groupName ? `Group/org: ${this.inquiry.groupName}` : null,
-                this.inquiry.additionalDetails || null
+                this.inquiry.organization ? `Organization: ${this.inquiry.organization}` : null,
+                this.inquiry.title ? `Title: ${this.inquiry.title}` : null,
+                this.inquiry.classPick ? `Class pick: ${this.inquiry.classPick}` : null
             ]
                 .filter(Boolean)
                 .join('\n')

@@ -15,26 +15,22 @@ export default class AcpAcceptGrowForm extends LightningElement {
     @api defaultInterest = '';
     sideImage = `${M}/img_form_grow_side.jpg`;
     @track interestPath = '';
-    @track participantName = '';
+    @track firstName = '';
+    @track lastName = '';
     @track email = '';
     @track phone = '';
-    @track urgency = '';
-    @track notes = '';
+    @track organization = '';
+    @track title = '';
+    @track location = '';
     @track emergencyAcknowledgment = '';
     @track isSubmitting = false;
     @track isComplete = false;
     @track errorMessage = '';
 
     interestOptions = [
-        { value: 'Weekly Drop-In', label: 'Weekly Drop-In (self-help / resilience circle)' },
-        { value: 'Suicide Prevention Awareness', label: 'Suicide Prevention Awareness pathway' },
-        { value: 'Self-Care Resources', label: 'Self-Care Resources & follow-up tools' }
-    ];
-
-    urgencyOptions = [
-        { value: 'Ready for next session', label: 'Ready for the next session' },
-        { value: 'Within a few weeks', label: 'Within a few weeks' },
-        { value: 'Just exploring', label: 'Just exploring' }
+        { value: 'Weekly Drop-In', label: 'Weekly Drop-In' },
+        { value: 'Suicide Prevention Awareness', label: 'Suicide Prevention Awareness' },
+        { value: 'Self-Care Resources', label: 'Self-Care Resources' }
     ];
 
     connectedCallback() {
@@ -57,9 +53,6 @@ export default class AcpAcceptGrowForm extends LightningElement {
 
     get interestChoices() {
         return this.interestOptions.map((o) => ({ ...o, checked: this.interestPath === o.value }));
-    }
-    get urgencyChoices() {
-        return this.urgencyOptions.map((o) => ({ ...o, checked: this.urgency === o.value }));
     }
     get emergencyChecked() {
         return Boolean(this.emergencyAcknowledgment);
@@ -90,23 +83,34 @@ export default class AcpAcceptGrowForm extends LightningElement {
         event.preventDefault();
         this.errorMessage = '';
         this.isSubmitting = true;
+        const fullName = `${this.firstName} ${this.lastName}`.trim();
+        const extras = [
+            this.organization ? `Org: ${this.organization}` : '',
+            this.title ? `Title: ${this.title}` : '',
+            this.location ? `Location: ${this.location}` : ''
+        ]
+            .filter(Boolean)
+            .join(' | ');
         try {
             await submitInquiry({
                 formType: 'Accept_Grow',
                 payloadJson: JSON.stringify({
                     completingAs: 'I am joining for myself',
-                    participantName: this.participantName,
+                    firstName: this.firstName,
+                    lastName: this.lastName,
+                    participantName: fullName,
+                    fullName,
                     participantAge: '',
                     parentGuardianName: '',
                     email: this.email,
                     phone: this.phone,
                     preferredContact: ['Email'],
                     bestCheckInTime: [],
-                    focusAreas: [this.interestPath].filter(Boolean),
-                    urgency: this.urgency,
+                    focusAreas: [this.interestPath, extras].filter(Boolean),
+                    urgency: 'Ready for next session',
                     communityAgreement: [],
                     emergencyAcknowledgment: this.emergencyAcknowledgment,
-                    notes: this.notes
+                    notes: extras
                 })
             });
             this.isComplete = true;
