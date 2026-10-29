@@ -1,0 +1,5 @@
+{
+  "apiName" : "impact",
+  "type" : "sfdc_cms__view",
+  "path" : "views"
+}

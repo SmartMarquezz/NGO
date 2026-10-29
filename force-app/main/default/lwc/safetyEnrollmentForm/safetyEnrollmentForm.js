@@ -1,351 +1,329 @@
-import { LightningElement, api, track } from 'lwc';
-import { ShowToastEvent } from 'lightning/platformShowToastEvent';
-import submitEnrollment from '@salesforce/apex/SafetyEnrollmentController.submitEnrollment';
+import { LightningElement, api, track, wire } from 'lwc';
 import MEDIA from '@salesforce/resourceUrl/acpTrainingMedia';
+import getOfferings from '@salesforce/apex/SafetyEnrollmentController.getOfferings';
+import submitClassRegistration from '@salesforce/apex/SafetyEnrollmentController.submitClassRegistration';
+import submitInquiry from '@salesforce/apex/AcpSiteFormController.submitInquiry';
 
-const TOTAL_PAGES = 5;
-
-const STATE_OPTIONS = [
-    'AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD',
-    'MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC',
-    'SD','TN','TX','UT','VT','VA','WA','WV','WI','WY','DC'
-].map((s) => ({ label: s, value: s }));
+const M = `${MEDIA}/acpTrainingMedia`;
 
 export default class SafetyEnrollmentForm extends LightningElement {
-    @api headline = 'Safety Training Enrollment';
+    @api headline = 'First Aid & CPR Registration';
+    @api embedMode = false;
+    /** @type {'inquiry'|'seat'} */
+    @api formMode = 'seat';
+    sideImage = `${M}/img_form_cpr_side.jpg`;
 
-    formBackdrop = `linear-gradient(180deg, rgba(19, 37, 58, 0.62), rgba(19, 37, 58, 0.42)), url(${MEDIA}/acpTrainingMedia/cpr.jpg) center/cover fixed`;
-
-    get formStyle() {
-        return `background:${this.formBackdrop}`;
-    }
-
-    @track currentPage = 1;
+    @track form = this.emptySeatForm();
+    @track inquiry = this.emptyInquiryForm();
+    @track offerings = [];
+    @track loadingOfferings = true;
     @track isSubmitting = false;
     @track isComplete = false;
-    @track enrollmentNumber;
-    @track submitError;
-    @track form = this.emptyForm();
+    @track submitError = '';
+    @track result = {};
 
-    get stateOptions() {
-        return STATE_OPTIONS.map((s) => ({
-            ...s,
-            selected: this.form.state === s.value
-        }));
-    }
-
-    ethnicityOptions = [
-        'Asian', 'Caucasian', 'Latino', 'African-American', 'South Indian',
-        'Pacific Islander', 'Native American', 'Middle Eastern', 'Multi-Racial',
-        'Prefer not to answer', 'Other'
+    preferredOptions = [
+        { value: 'Email', label: 'Email' },
+        { value: 'Text Message', label: 'Text Message' },
+        { value: 'Phone Call', label: 'Phone Call' }
     ];
 
-    get progressPercent() {
-        return Math.round((this.currentPage / TOTAL_PAGES) * 100);
+    deliveryOptions = [
+        { value: 'In-Person (Instructor Led)', label: 'In-Person (Instructor Led)' },
+        {
+            value: 'Blended (Mostly Online with In-Person Skills)',
+            label: 'Blended (Mostly Online with In-Person Skills)'
+        }
+    ];
+
+    timeOptions = [
+        { value: '9:00 AM', label: '9:00 AM' },
+        { value: '10:00 AM', label: '10:00 AM' },
+        { value: '1:00 PM', label: '1:00 PM' },
+        { value: '4:30 PM', label: '4:30 PM' },
+        { value: '6:00 PM', label: '6:00 PM' }
+    ];
+
+    classInterestOptions = [
+        { value: 'Basic Life Support (BLS)', label: 'Basic Life Support (BLS) - healthcare / clinical' },
+        {
+            value: 'Adult & Pediatric First Aid / CPR / AED',
+            label: 'Adult & Pediatric First Aid / CPR / AED'
+        },
+        { value: 'Adult First Aid / CPR / AED', label: 'Adult First Aid / CPR / AED' },
+        { value: 'Adult & Pediatric CPR / AED', label: 'Adult & Pediatric CPR / AED' },
+        { value: 'Adult CPR / AED', label: 'Adult CPR / AED' },
+        { value: 'First Aid only', label: 'First Aid only' },
+        { value: 'Not sure - please recommend', label: 'Not sure - please recommend' }
+    ];
+
+    reasonOptions = [
+        { value: 'Workplace / job requirement', label: 'Workplace / job requirement' },
+        { value: 'School / college requirement', label: 'School / college requirement' },
+        { value: 'Healthcare / clinical program', label: 'Healthcare / clinical program' },
+        { value: 'Childcare / teaching / coaching', label: 'Childcare / teaching / coaching' },
+        { value: 'Personal / family preparedness', label: 'Personal / family preparedness' },
+        { value: 'Group / organization training', label: 'Group / organization training' },
+        { value: 'Renewal / recertification', label: 'Renewal / recertification' }
+    ];
+
+    experienceOptions = [
+        { value: 'First time', label: 'First time taking this type of class' },
+        { value: 'Renewal', label: 'Renewal / I have certified before' },
+        { value: 'Not sure', label: 'Not sure' }
+    ];
+
+    timingOptions = [
+        { value: 'As soon as possible', label: 'As soon as possible' },
+        { value: 'Within 2 weeks', label: 'Within 2 weeks' },
+        { value: 'Within a month', label: 'Within a month' },
+        { value: 'Flexible / exploring options', label: 'Flexible / exploring options' }
+    ];
+
+    @wire(getOfferings, { offeringType: 'Class' })
+    wiredOfferings({ data, error }) {
+        this.loadingOfferings = false;
+        if (data) {
+            this.offerings = data;
+        } else if (error) {
+            this.offerings = [];
+            if (this.isSeatMode) {
+                this.submitError = error?.body?.message || 'Unable to load class inventory.';
+            }
+        }
     }
 
-    get progressStyle() {
-        return `width:${this.progressPercent}%`;
-    }
-
-    get pageLabel() {
-        return `Page ${this.currentPage} of ${TOTAL_PAGES}`;
-    }
-
-    get isFirstPage() {
-        return this.currentPage === 1;
-    }
-
-    get isLastPage() {
-        return this.currentPage === TOTAL_PAGES;
-    }
-
-    get showPage1() { return this.currentPage === 1 && !this.isComplete; }
-    get showPage2() { return this.currentPage === 2 && !this.isComplete; }
-    get showPage3() { return this.currentPage === 3 && !this.isComplete; }
-    get showPage4() { return this.currentPage === 4 && !this.isComplete; }
-    get showPage5() { return this.currentPage === 5 && !this.isComplete; }
-    get showNav() { return !this.isComplete; }
-
-    get nextLabel() {
-        return this.isLastPage ? 'Submit' : 'Next';
-    }
-
-    get showAgencyOther() {
-        return this.form.certifyingAgency === 'Other';
-    }
-
-    get showEthnicityOther() {
-        return (this.form.ethnicity || []).includes('Other');
-    }
-
-    get showMaritalOther() {
-        return this.form.maritalStatus === 'Other';
-    }
-
-    get showSexOther() {
-        return this.form.sexAtBirth === 'Other';
-    }
-
-    get showEmploymentOther() {
-        return this.form.employmentStatus === 'Other';
-    }
-
-    get showEducationOther() {
-        return this.form.highestEducation === 'Other';
-    }
-
-    get showPeerOther() {
-        return this.form.selfCarePeerHelp === 'Other';
-    }
-
-    get likertOptions() {
-        return [1, 2, 3, 4, 5];
-    }
-
-    emptyForm() {
+    emptySeatForm() {
         return {
-            email: '',
-            greatDay: '',
-            classDate: '',
-            classTime: '',
             firstName: '',
             lastName: '',
+            email: '',
             phone: '',
-            dateOfBirth: '',
+            preferredContact: '',
+            offeringId: '',
+            deliveryOption: '',
+            classDate: '',
+            classTime: '',
             groupName: '',
-            profession: '',
-            streetAddress: '',
-            city: '',
-            state: '',
-            postalCode: '',
-            certifyingAgency: '',
-            certifyingAgencyOther: '',
-            ethnicity: [],
-            ethnicityOther: '',
-            maritalStatus: '',
-            maritalStatusOther: '',
-            sexAtBirth: '',
-            sexAtBirthOther: '',
-            employmentStatus: '',
-            employmentStatusOther: '',
-            highestEducation: '',
-            highestEducationOther: '',
-            cprPreviously: '',
-            physicalHealth: null,
-            mentalHealth: null,
-            emotionalHealth: null,
-            socialNetwork: null,
-            cprConfidence: null,
-            nutritionalChoices: null,
-            overallHealthSatisfaction: null,
-            learnSelfCare: '',
-            selfCarePeerHelp: '',
-            selfCarePeerOther: ''
+            trainingNotes: ''
         };
     }
 
-    handleChange(event) {
-        const { name, value, type, checked } = event.target;
-        if (type === 'checkbox') {
-            const selected = new Set(this.form.ethnicity || []);
-            if (checked) {
-                selected.add(value);
-            } else {
-                selected.delete(value);
-            }
-            this.form = { ...this.form, ethnicity: Array.from(selected) };
-            return;
+    emptyInquiryForm() {
+        return {
+            fullName: '',
+            email: '',
+            phone: '',
+            preferredContact: '',
+            classInterests: [],
+            reasons: [],
+            deliveryOption: '',
+            experienceLevel: '',
+            timingNeed: '',
+            groupName: '',
+            additionalDetails: ''
+        };
+    }
+
+    get isInquiryMode() {
+        return (this.formMode || 'seat').toLowerCase() === 'inquiry';
+    }
+
+    get isSeatMode() {
+        return !this.isInquiryMode;
+    }
+
+    get rootClass() {
+        return this.embedMode ? 'embed' : 'site';
+    }
+
+    get pageClass() {
+        return this.embedMode ? 'page is-embed' : 'page';
+    }
+
+    get visualTitle() {
+        return this.isInquiryMode ? 'Tell us what you need. We’ll point you to the right class.' : 'Reserve your seat. Walk out rescue-ready.';
+    }
+
+    get visualCopy() {
+        return this.isInquiryMode
+            ? 'A few questions help us recommend BLS, HeartSaver, First Aid, adult vs pediatric, and the best format.'
+            : 'Pick your class, hold inventory in Salesforce, then finish payment on QuickBooks.';
+    }
+
+    get introTitle() {
+        return this.isInquiryMode ? 'Class inquiry' : this.headline || 'First Aid & CPR Registration';
+    }
+
+    get introCopy() {
+        return this.isInquiryMode
+            ? 'Use this if you are unsure which class fits. We’ll follow up with the best option and how to enroll on the current schedule.'
+            : 'Choose your class, reserve a seat, then complete payment with the QuickBooks link. You’ll receive your student access code when registration is confirmed.';
+    }
+
+    get preferredChoices() {
+        const selected = this.isInquiryMode ? this.inquiry.preferredContact : this.form.preferredContact;
+        return this.preferredOptions.map((o) => ({
+            ...o,
+            checked: selected === o.value
+        }));
+    }
+
+    get deliveryChoices() {
+        const selected = this.isInquiryMode ? this.inquiry.deliveryOption : this.form.deliveryOption;
+        return this.deliveryOptions.map((o) => ({
+            ...o,
+            checked: selected === o.value
+        }));
+    }
+
+    get timeChoices() {
+        return this.timeOptions.map((o) => ({
+            ...o,
+            selected: this.form.classTime === o.value
+        }));
+    }
+
+    get offeringChoices() {
+        return (this.offerings || []).map((o) => ({
+            ...o,
+            checked: this.form.offeringId === o.id,
+            disabled: o.available === false
+        }));
+    }
+
+    get hasOfferings() {
+        return (this.offerings || []).length > 0;
+    }
+
+    get classInterestChoices() {
+        return this.classInterestOptions.map((o) => ({
+            ...o,
+            checked: this.inquiry.classInterests.includes(o.value)
+        }));
+    }
+
+    get reasonChoices() {
+        return this.reasonOptions.map((o) => ({
+            ...o,
+            checked: this.inquiry.reasons.includes(o.value)
+        }));
+    }
+
+    get experienceChoices() {
+        return this.experienceOptions.map((o) => ({
+            ...o,
+            checked: this.inquiry.experienceLevel === o.value
+        }));
+    }
+
+    get timingChoices() {
+        return this.timingOptions.map((o) => ({
+            ...o,
+            checked: this.inquiry.timingNeed === o.value
+        }));
+    }
+
+    get submitLabel() {
+        if (this.isSubmitting) return 'Submitting…';
+        return this.isInquiryMode ? 'Send class inquiry' : 'Reserve seat & get payment link';
+    }
+
+    handleText(event) {
+        const { name, value } = event.target;
+        if (this.isInquiryMode) {
+            this.inquiry = { ...this.inquiry, [name]: value };
+        } else {
+            this.form = { ...this.form, [name]: value };
         }
-        this.form = { ...this.form, [name]: value };
     }
 
     handleRadio(event) {
-        const name = event.currentTarget.dataset.name;
-        const value = event.currentTarget.dataset.value;
-        this.form = { ...this.form, [name]: value };
-    }
-
-    isSelected(name, value) {
-        return this.form[name] === value;
-    }
-
-    isEthnicityChecked(value) {
-        return (this.form.ethnicity || []).includes(value);
-    }
-
-    get greatDayOptions() {
-        return this.withSelected('greatDay', ['Yes', 'No', 'Unsure', 'Need Help']);
-    }
-
-    get agencyOptions() {
-        return this.withSelected('certifyingAgency', [
-            'Not Sure',
-            'American Heart Association',
-            'American Red Cross',
-            'ECSI (Emergency Care & Safety Institute)',
-            'American Trauma Event Management',
-            'National Safety Council',
-            'Custom Class',
-            'Other'
-        ]);
-    }
-
-    get maritalOptions() {
-        return this.withSelected('maritalStatus', ['Single', 'Married', 'Divorced', 'Widow', 'Other']);
-    }
-
-    get sexOptions() {
-        return this.withSelected('sexAtBirth', ['Male', 'Female', 'Prefer not to answer', 'Other']);
-    }
-
-    get employmentOptions() {
-        return this.withSelected('employmentStatus', [
-            'Unemployed', 'Employed Full-Time', 'Employed Part-Time', 'Student', 'Retired', 'Other'
-        ]);
-    }
-
-    get educationOptions() {
-        return this.withSelected('highestEducation', [
-            'High School', 'Associate', 'Certificate', 'Bachelor', 'Masters', 'Doctorate', 'Other'
-        ]);
-    }
-
-    get cprOptions() {
-        return this.withSelected('cprPreviously', ['Yes', 'No', 'Not sure']);
-    }
-
-    get selfCareOptions() {
-        return this.withSelected('learnSelfCare', ['Yes', 'No', 'Maybe', 'Need more information']);
-    }
-
-    get peerOptions() {
-        return this.withSelected('selfCarePeerHelp', ['Yes', 'No', 'Maybe', 'Need more information', 'Other']);
-    }
-
-    get ethnicityChoices() {
-        return this.ethnicityOptions.map((value) => ({
-            value,
-            checked: this.isEthnicityChecked(value)
-        }));
-    }
-
-    get readinessQuestions() {
-        return [
-            { key: 'physicalHealth', label: 'I feel my physical health is adequate.', left: 'Strongly disagree', right: 'Strongly agree' },
-            { key: 'mentalHealth', label: 'I feel my mental health is adequate.', left: 'Strongly disagree', right: 'Strongly agree' },
-            { key: 'emotionalHealth', label: 'I feel my emotional health is balanced.', left: 'Strongly disagree', right: 'Strongly agree' },
-            { key: 'socialNetwork', label: 'I feel my social network is supportive.', left: 'Strongly disagree', right: 'Strongly agree' },
-            { key: 'cprConfidence', label: 'I feel confident to provide CPR if needed.', left: 'Strongly disagree', right: 'Strongly agree' },
-            { key: 'nutritionalChoices', label: 'I feel I make wise nutritional choices for my overall health.', left: 'Strongly disagree', right: 'Strongly agree' },
-            { key: 'overallHealthSatisfaction', label: 'I feel satisfied with my overall health?', left: 'Very satisfied', right: 'Very dissatisfied' }
-        ].map((q) => ({
-            ...q,
-            options: this.likertOptions.map((n) => {
-                const selected = String(this.form[q.key]) === String(n);
-                return {
-                    value: String(n),
-                    selected,
-                    buttonClass: selected ? 'is-selected' : ''
-                };
-            })
-        }));
-    }
-
-    withSelected(field, values) {
-        return values.map((value) => {
-            const selected = this.form[field] === value;
-            return {
-                value,
-                selected,
-                buttonClass: selected ? 'is-selected' : ''
-            };
-        });
-    }
-
-    handleBack() {
-        if (this.currentPage > 1) {
-            this.currentPage -= 1;
-            this.scrollTop();
+        const { name, value } = event.target;
+        if (this.isInquiryMode) {
+            this.inquiry = { ...this.inquiry, [name]: value };
+        } else {
+            this.form = { ...this.form, [name]: value };
         }
     }
 
-    async handleNext() {
-        if (!this.validateCurrentPage()) {
-            this.toast('Please complete the required fields on this page.', 'error');
-            return;
+    handleMulti(event) {
+        const { name, value, checked } = event.target;
+        const current = [...(this.inquiry[name] || [])];
+        if (checked) {
+            if (!current.includes(value)) current.push(value);
+        } else {
+            const idx = current.indexOf(value);
+            if (idx >= 0) current.splice(idx, 1);
         }
-        if (this.isLastPage) {
-            await this.submit();
-            return;
-        }
-        this.currentPage += 1;
-        this.scrollTop();
+        this.inquiry = { ...this.inquiry, [name]: current };
     }
 
-    handleClear() {
-        this.form = this.emptyForm();
-        this.currentPage = 1;
-        this.isComplete = false;
-        this.enrollmentNumber = null;
-        this.toast('Form cleared.', 'info');
-    }
-
-    validateCurrentPage() {
-        const f = this.form;
-        if (this.currentPage === 1) {
-            return f.email && f.greatDay;
+    async handleSubmit(event) {
+        event.preventDefault();
+        this.submitError = '';
+        if (this.isInquiryMode) {
+            if (!(this.inquiry.classInterests || []).length) {
+                this.submitError = 'Please select at least one class type (or Not sure).';
+                return;
+            }
+            // Pre-qual only — reasons/timing optional to reduce friction
+            if (!(this.inquiry.reasons || []).length) {
+                this.inquiry = { ...this.inquiry, reasons: ['Need recommendation'] };
+            }
+            if (!this.inquiry.preferredContact) {
+                this.inquiry = { ...this.inquiry, preferredContact: 'Email' };
+            }
+            if (!this.inquiry.experienceLevel) {
+                this.inquiry = { ...this.inquiry, experienceLevel: 'Not sure' };
+            }
+            if (!this.inquiry.timingNeed) {
+                this.inquiry = { ...this.inquiry, timingNeed: 'Flexible' };
+            }
+            if (!this.inquiry.groupName) {
+                this.inquiry = { ...this.inquiry, groupName: 'Individual' };
+            }
         }
-        if (this.currentPage === 2) {
-            return f.classDate && f.classTime && f.firstName && f.lastName && f.phone && f.dateOfBirth && f.groupName && f.profession;
-        }
-        if (this.currentPage === 3) {
-            return f.streetAddress && f.city && f.state && f.postalCode && f.certifyingAgency;
-        }
-        if (this.currentPage === 4) {
-            return f.maritalStatus && f.sexAtBirth && f.employmentStatus && f.highestEducation && f.cprPreviously;
-        }
-        if (this.currentPage === 5) {
-            return (
-                f.physicalHealth && f.mentalHealth && f.emotionalHealth && f.socialNetwork &&
-                f.cprConfidence && f.nutritionalChoices && f.overallHealthSatisfaction &&
-                f.learnSelfCare && f.selfCarePeerHelp
-            );
-        }
-        return true;
-    }
-
-    async submit() {
         this.isSubmitting = true;
         try {
-            const id = await submitEnrollment({ payloadJson: JSON.stringify(this.form) });
-            this.enrollmentNumber = id;
-            this.isComplete = true;
-            this.toast('Enrollment submitted. Welcome to All Care Plus!', 'success');
-        } catch (error) {
-            const message = error?.body?.message || error?.message || 'Unable to submit enrollment.';
-            this.toast(message, 'error');
+            if (this.isInquiryMode) {
+                await this.submitInquiryForm();
+            } else {
+                const payload = await submitClassRegistration({
+                    payloadJson: JSON.stringify(this.form)
+                });
+                this.result = payload || {};
+                this.isComplete = true;
+            }
+        } catch (e) {
+            this.submitError = e?.body?.message || e?.message || 'Unable to submit right now. Please try again.';
         } finally {
             this.isSubmitting = false;
         }
     }
 
-    scrollTop() {
-        // eslint-disable-next-line @lwc/lwc/no-async-operation
-        setTimeout(() => {
-            const root = this.template.querySelector('.acp-form');
-            if (root) {
-                root.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        }, 50);
-    }
-
-    toast(message, variant) {
-        this.submitError = variant === 'error' ? message : null;
-        try {
-            this.dispatchEvent(new ShowToastEvent({ title: 'All Care Plus', message, variant }));
-        } catch (e) {
-            // Guest Experience Cloud users may not support toasts
-        }
+    async submitInquiryForm() {
+        const payload = {
+            fullName: this.inquiry.fullName,
+            email: this.inquiry.email,
+            phone: this.inquiry.phone,
+            preferredContact: this.inquiry.preferredContact,
+            interestAreas: this.inquiry.classInterests,
+            availability: [
+                this.inquiry.deliveryOption,
+                this.inquiry.experienceLevel,
+                this.inquiry.timingNeed
+            ].filter(Boolean),
+            focusAreas: this.inquiry.reasons,
+            additionalDetails: [
+                this.inquiry.groupName ? `Group/org: ${this.inquiry.groupName}` : null,
+                this.inquiry.additionalDetails || null
+            ]
+                .filter(Boolean)
+                .join('\n')
+        };
+        await submitInquiry({ formType: 'CPR_Inquiry', payloadJson: JSON.stringify(payload) });
+        this.isComplete = true;
+        this.result = { inquiry: true };
     }
 }

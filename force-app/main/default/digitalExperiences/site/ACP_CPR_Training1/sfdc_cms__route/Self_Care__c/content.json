@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "Self-Care for Success",
+  "contentBody" : {
+    "activeViewId" : "selfCare",
+    "configurationTags" : [ ],
+    "pageAccess" : "Public",
+    "routeType" : "custom-self-care",
+    "urlPrefix" : "self-care"
+  },
+  "urlName" : "self-care"
+}

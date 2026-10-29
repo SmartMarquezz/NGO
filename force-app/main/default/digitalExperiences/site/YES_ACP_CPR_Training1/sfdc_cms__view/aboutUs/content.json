@@ -1,0 +1,67 @@
+{
+  "type" : "sfdc_cms__view",
+  "title" : "About Us",
+  "contentBody" : {
+    "component" : {
+      "children" : [ {
+        "children" : [ {
+          "attributes" : {
+            "backgroundImageConfig" : "",
+            "backgroundImageOverlay" : "rgba(0,0,0,0)",
+            "componentSpacerSize" : "",
+            "layoutDirectionDesktop" : "row",
+            "layoutDirectionMobile" : "column",
+            "layoutDirectionTablet" : "column",
+            "maxContentWidth" : "",
+            "sectionColumnGutterWidth" : "",
+            "sectionConfig" : "{\"UUID\":\"65e4a080-2997-4133-be45-e2f7b2b2f19f\",\"columns\":[{\"UUID\":\"a68fdc3a-1e4b-4e7f-acd5-c40c087b33df\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":null}]}",
+            "sectionMinHeight" : "",
+            "sectionVerticalAlign" : "flex-start"
+          },
+          "children" : [ {
+            "children" : [ {
+              "attributes" : { },
+              "definition" : "c:acpAboutPage",
+              "id" : "87b79800-e1a9-41cf-adab-e09c23a60573",
+              "type" : "component"
+            } ],
+            "id" : "9ffe5d6b-d3b7-45ae-9506-f99f00117375",
+            "name" : "col1",
+            "title" : "Column 1",
+            "type" : "region"
+          } ],
+          "definition" : "community_layout:section",
+          "id" : "6d063f5d-65d5-4e50-a06f-7ee1d3e5e696",
+          "type" : "component"
+        } ],
+        "id" : "51ea69fe-cb5f-4e73-b7c2-a7b4afcc242e",
+        "name" : "content",
+        "title" : "Content",
+        "type" : "region"
+      }, {
+        "children" : [ {
+          "attributes" : {
+            "customHeadTags" : "",
+            "description" : "Mission, history, board, and committees of All Care Plus",
+            "pageTitle" : "About Us | All Care Plus",
+            "recordId" : "{!recordId}"
+          },
+          "definition" : "community_builder:seoAssistant",
+          "id" : "6181c742-55c1-4d33-85cb-b67ecb6c4d99",
+          "type" : "component"
+        } ],
+        "id" : "7bede20e-6348-4bdd-b395-4d17ca9764ca",
+        "name" : "sfdcHiddenRegion",
+        "title" : "sfdcHiddenRegion",
+        "type" : "region"
+      } ],
+      "definition" : "community_layout:sldsFlexibleLayout",
+      "id" : "6b08ed9b-7bc6-4ab8-b9b2-b2d84f62456b",
+      "type" : "component"
+    },
+    "dataProviders" : [ ],
+    "themeLayoutType" : "Inner",
+    "viewType" : "custom-about"
+  },
+  "urlName" : "about"
+}

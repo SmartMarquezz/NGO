@@ -1,0 +1,67 @@
+{
+  "type" : "sfdc_cms__view",
+  "title" : "Contact",
+  "contentBody" : {
+    "component" : {
+      "children" : [ {
+        "children" : [ {
+          "attributes" : {
+            "backgroundImageConfig" : "",
+            "backgroundImageOverlay" : "rgba(0,0,0,0)",
+            "componentSpacerSize" : "",
+            "layoutDirectionDesktop" : "row",
+            "layoutDirectionMobile" : "column",
+            "layoutDirectionTablet" : "column",
+            "maxContentWidth" : "",
+            "sectionColumnGutterWidth" : "",
+            "sectionConfig" : "{\"UUID\":\"a08ee203-81fb-4b42-9e65-385676c814b3\",\"columns\":[{\"UUID\":\"d544bfb5-d7cb-4deb-8079-e1139d9a65e8\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":null}]}",
+            "sectionMinHeight" : "",
+            "sectionVerticalAlign" : "flex-start"
+          },
+          "children" : [ {
+            "children" : [ {
+              "attributes" : { },
+              "definition" : "c:acpContactPage",
+              "id" : "7b447894-b4dd-4f03-b470-1d1b3085bbfe",
+              "type" : "component"
+            } ],
+            "id" : "32c2f949-d8e9-40fe-ae2c-bb7741d02701",
+            "name" : "col1",
+            "title" : "Column 1",
+            "type" : "region"
+          } ],
+          "definition" : "community_layout:section",
+          "id" : "2a14a1c9-540f-4637-875e-716310bb6cab",
+          "type" : "component"
+        } ],
+        "id" : "1a4aa203-be65-454b-8764-95495d600cad",
+        "name" : "content",
+        "title" : "Content",
+        "type" : "region"
+      }, {
+        "children" : [ {
+          "attributes" : {
+            "customHeadTags" : "",
+            "description" : "Contact All Care Plus in Palo Alto",
+            "pageTitle" : "Contact | All Care Plus",
+            "recordId" : "{!recordId}"
+          },
+          "definition" : "community_builder:seoAssistant",
+          "id" : "37242174-b7cc-443a-af24-c44843bc240b",
+          "type" : "component"
+        } ],
+        "id" : "c252a56a-4b1b-4d5e-b1ad-f3d9a582866d",
+        "name" : "sfdcHiddenRegion",
+        "title" : "sfdcHiddenRegion",
+        "type" : "region"
+      } ],
+      "definition" : "community_layout:sldsFlexibleLayout",
+      "id" : "86810140-82cf-4614-b461-e9a917e6831f",
+      "type" : "component"
+    },
+    "dataProviders" : [ ],
+    "themeLayoutType" : "Inner",
+    "viewType" : "custom-contact"
+  },
+  "urlName" : "contact"
+}

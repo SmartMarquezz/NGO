@@ -1,0 +1,86 @@
+<template>
+    <div class="site">
+        <c-acp-site-nav active-page="services"></c-acp-site-nav>
+
+        <section class="hero">
+            <img class="hero-bg" src={media.hero} alt="" />
+            <div class="hero-shade"></div>
+            <div class="hero-copy">
+                <p class="eyebrow">3 · PEER SUPPORT</p>
+                <h1>Free support that shows up where people already gather.</h1>
+                <p>Need support — or want to join the peer team? Choose your path below.</p>
+                <div class="hero-actions">
+                    <button class="cta" type="button" onclick={handleNeedSupport}>I need Peer Support</button>
+                    <button class="cta ghost" type="button" onclick={handleVolunteer}>I want to volunteer</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="split-paths reveal" data-reveal>
+            <article id="need-support">
+                <p class="eyebrow dark">NEED SUPPORT</p>
+                <h2>Request Peer Support</h2>
+                <p>
+                    Listening, resources, and warm connections at local events — or tell us what you need and we’ll
+                    follow up.
+                </p>
+                <ul>
+                    <li>On-site support at community and school events</li>
+                    <li>Referrals into Accept &amp; Grow and CPR paths</li>
+                    <li>Resource packets for families and partners</li>
+                </ul>
+                <button class="cta" type="button" onclick={handleNeedSupport}>Request support</button>
+            </article>
+            <article id="join-team" class="alt">
+                <p class="eyebrow dark">JOIN THE TEAM</p>
+                <h2>Volunteer as a Peer Helper</h2>
+                <p>
+                    If you’ve walked a similar path and want to help others, register interest and we’ll share volunteer
+                    next steps.
+                </p>
+                <ul>
+                    <li>Peer presence at fairs, schools, and neighborhood events</li>
+                    <li>Training pathways into Accept &amp; Grow / Plus Rescuer</li>
+                    <li>Simple interest form — no long application up front</li>
+                </ul>
+                <button class="cta" type="button" onclick={handleVolunteer}>Volunteer interest form</button>
+            </article>
+        </section>
+
+        <section class="guide reveal" data-reveal>
+            <div class="guide-head">
+                <p class="eyebrow dark">EXPLORE PEER SUPPORT</p>
+                <h2>Why it matters · What’s included · When · How to get involved</h2>
+            </div>
+            <div class="guide-grid">
+                <article>
+                    <span class="guide-label">Why it’s important</span>
+                    <h3>Support without barriers</h3>
+                    <p>Help works best when it meets people in familiar places — fairs, schools, and neighborhoods.</p>
+                </article>
+                <article>
+                    <span class="guide-label">Components</span>
+                    <h3>What we offer</h3>
+                    <ul>
+                        <li>On-site listening and warm connections</li>
+                        <li>Self-care and training resource packets</li>
+                        <li>Referrals into Accept &amp; Grow and CPR</li>
+                        <li>Volunteer opportunities for peer helpers</li>
+                    </ul>
+                </article>
+                <article>
+                    <span class="guide-label">When it’s offered</span>
+                    <h3>At community events</h3>
+                    <p>Presence follows partner calendars. Online peer meetings are coming soon.</p>
+                </article>
+                <article>
+                    <span class="guide-label">How to get involved</span>
+                    <h3>Two clear doors</h3>
+                    <p>Request support, or join as a volunteer — short forms, direct links you can share.</p>
+                </article>
+            </div>
+        </section>
+
+        <c-acp-site-footer></c-acp-site-footer>
+    </div>
+</template>

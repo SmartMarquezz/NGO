@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "Donate Now",
+  "contentBody" : {
+    "activeViewId" : "donateNow",
+    "configurationTags" : [ ],
+    "pageAccess" : "Public",
+    "routeType" : "custom-donate-now",
+    "urlPrefix" : "donate"
+  },
+  "urlName" : "donate"
+}

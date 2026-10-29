@@ -1,0 +1,50 @@
+<template>
+    <div class="site">
+        <c-acp-site-nav active-page="services"></c-acp-site-nav>
+
+        <section class="hero">
+            <img class="hero-bg" src={media.hero} alt="" />
+            <div class="hero-shade"></div>
+            <div class="hero-copy">
+                <p class="eyebrow">STORE</p>
+                <h1>Books and training supplies that support the work.</h1>
+                <p>
+                    Manuals and class kits ship from here. Class seats with AHA / ECSI inventory live on registration.
+                    Red Cross options can sell in real time without seat inventory.
+                </p>
+            </div>
+        </section>
+
+        <section class="catalog reveal" data-reveal>
+            <p class="eyebrow dark">FEATURED ITEMS</p>
+            <h2>Ready for purchase</h2>
+            <div class="grid">
+                <template for:each={products} for:item="item">
+                    <article key={item.key}>
+                        <img src={item.image} alt={item.alt} />
+                        <div>
+                            <p class="type">{item.type}</p>
+                            <h3>{item.title}</h3>
+                            <p>{item.summary}</p>
+                            <p class="price">{item.price}</p>
+                            <button
+                                class="cta"
+                                type="button"
+                                data-path={item.path}
+                                data-external={item.external}
+                                onclick={handlePath}
+                            >
+                                {item.cta}
+                            </button>
+                        </div>
+                    </article>
+                </template>
+            </div>
+            <p class="note">
+                QuickBooks payment links on Training Offering records power Buy buttons automatically once pasted in.
+            </p>
+        </section>
+
+        <c-acp-site-footer></c-acp-site-footer>
+    </div>
+</template>

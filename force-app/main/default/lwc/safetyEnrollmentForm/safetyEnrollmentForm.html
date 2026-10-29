@@ -1,289 +1,265 @@
 <template>
-    <div class="acp-form" style={formStyle}>
-        <header class="acp-hero">
-            <div class="acp-brand">ALL CARE PLUS</div>
-            <h1>{headline}</h1>
-            <p>CPR &amp; Safety Training registration — your path to confident, ready care.</p>
-        </header>
-
-        <template if:true={submitError}>
-            <div class="acp-error" role="alert">{submitError}</div>
+    <div class={rootClass}>
+        <template if:false={embedMode}>
+            <c-acp-site-nav active-page="enroll"></c-acp-site-nav>
         </template>
 
-        <template if:true={isComplete}>
-            <section class="acp-card acp-complete">
-                <div class="acp-section-label">Let's get your training started!</div>
-                <p class="acp-lead">
-                    Your input helps us advocate the benefits of self-care. If you want to support our program,
-                    speak to your instructor or email support@allcareplus.org. All Care Plus is a volunteer-managed
-                    nonprofit organization. We appreciate your feedback.
-                </p>
-                <blockquote>
-                    Empty your mind. Be formless, shapeless, like water. Put water into a cup, it becomes the cup.
-                    Put it into a bottle, it becomes the bottle. Put it in a teapot, it becomes the teapot.
-                    Water can flow, or it can crash. Be water, my friend.
-                    <cite>— Bruce Lee</cite>
-                </blockquote>
-                <div class="acp-logo-mark" aria-hidden="true">
-                    <div class="acp-ring">
-                        <span></span><span></span><span></span>
+        <section class={pageClass}>
+            <div class="layout">
+                <aside class="visual" aria-hidden="true">
+                    <img src={sideImage} alt="" />
+                    <div class="visual-shade"></div>
+                    <div class="visual-copy">
+                        <p class="eyebrow">PLUS RESCUER</p>
+                        <h2>{visualTitle}</h2>
+                        <p>{visualCopy}</p>
                     </div>
-                    <strong>ALL CARE PLUS</strong>
-                </div>
-                <p class="acp-success">Enrollment received. Thank you for joining Safety Training.</p>
-            </section>
-        </template>
+                </aside>
 
-        <template if:true={showPage1}>
-            <section class="acp-card">
-                <label class="acp-label">Email <abbr title="required">*</abbr></label>
-                <input class="acp-input" type="email" name="email" value={form.email} onchange={handleChange} placeholder="Your email" required />
-            </section>
-            <section class="acp-card">
-                <label class="acp-label">Thank you for joining our Safety Training course. Are you having a great day? <abbr title="required">*</abbr></label>
-                <div class="acp-options">
-                    <template for:each={greatDayOptions} for:item="opt">
-                        <button key={opt.value} type="button" class={opt.buttonClass} data-name="greatDay" data-value={opt.value} onclick={handleRadio}>
-                            <span class="acp-radio"></span>{opt.value}
-                        </button>
-                    </template>
-                </div>
-            </section>
-        </template>
+                <section class="form-shell">
+                    <header class="intro">
+                        <h2>{introTitle}</h2>
+                        <p>{introCopy}</p>
+                    </header>
 
-        <template if:true={showPage2}>
-            <section class="acp-card">
-                <label class="acp-label">Enter Your Class Date <abbr title="required">*</abbr></label>
-                <input class="acp-input" type="date" name="classDate" value={form.classDate} onchange={handleChange} required />
-            </section>
-            <section class="acp-card">
-                <label class="acp-label">Enter Your Class Time <abbr title="required">*</abbr></label>
-                <input class="acp-input" type="text" name="classTime" value={form.classTime} onchange={handleChange} placeholder="e.g. 10:00 AM" required />
-            </section>
-            <section class="acp-card">
-                <label class="acp-label">Enter Your First Name <abbr title="required">*</abbr></label>
-                <input class="acp-input" type="text" name="firstName" value={form.firstName} onchange={handleChange} placeholder="Your answer" required />
-            </section>
-            <section class="acp-card">
-                <label class="acp-label">Enter Your Last Name <abbr title="required">*</abbr></label>
-                <input class="acp-input" type="text" name="lastName" value={form.lastName} onchange={handleChange} placeholder="Your answer" required />
-            </section>
-            <section class="acp-card">
-                <label class="acp-label">Your Phone Number. Enter numbers without dashes or spaces (e.g. 4445556666) <abbr title="required">*</abbr></label>
-                <input class="acp-input" type="tel" name="phone" value={form.phone} onchange={handleChange} placeholder="Your answer" required />
-            </section>
-            <section class="acp-card">
-                <label class="acp-label">Date of Birth (Format: MM/DD/YYYY) <abbr title="required">*</abbr></label>
-                <input class="acp-input" type="date" name="dateOfBirth" value={form.dateOfBirth} onchange={handleChange} required />
-            </section>
-            <section class="acp-card">
-                <label class="acp-label">Group Name (Employer, Group Name or Individual) <abbr title="required">*</abbr></label>
-                <input class="acp-input" type="text" name="groupName" value={form.groupName} onchange={handleChange} placeholder="Your answer" required />
-            </section>
-            <section class="acp-card">
-                <label class="acp-label">Your Profession or Title <abbr title="required">*</abbr></label>
-                <input class="acp-input" type="text" name="profession" value={form.profession} onchange={handleChange} placeholder="Your answer" required />
-            </section>
-        </template>
-
-        <template if:true={showPage3}>
-            <section class="acp-card">
-                <label class="acp-label">Your Street Address <abbr title="required">*</abbr></label>
-                <input class="acp-input" type="text" name="streetAddress" value={form.streetAddress} onchange={handleChange} placeholder="Your answer" required />
-            </section>
-            <section class="acp-card">
-                <label class="acp-label">Your City Address <abbr title="required">*</abbr></label>
-                <input class="acp-input" type="text" name="city" value={form.city} onchange={handleChange} placeholder="Your answer" required />
-            </section>
-            <section class="acp-card">
-                <label class="acp-label">Your State Address <abbr title="required">*</abbr></label>
-                <select class="acp-input" name="state" value={form.state} onchange={handleChange}>
-                    <option value="">Choose</option>
-                    <template for:each={stateOptions} for:item="st">
-                        <option key={st.value} value={st.value}>{st.label}</option>
-                    </template>
-                </select>
-            </section>
-            <section class="acp-card">
-                <label class="acp-label">Your State Postal Code, five digits (#####) <abbr title="required">*</abbr></label>
-                <input class="acp-input" type="text" name="postalCode" value={form.postalCode} onchange={handleChange} placeholder="Your answer" maxlength="5" required />
-            </section>
-            <section class="acp-card">
-                <label class="acp-label">Select the Certifying Agency <abbr title="required">*</abbr></label>
-                <div class="acp-agency-badges">
-                    <span>American Red Cross Authorized Provider</span>
-                    <span>American Heart Association Authorized Provider</span>
-                </div>
-                <div class="acp-options">
-                    <template for:each={agencyOptions} for:item="opt">
-                        <button key={opt.value} type="button" class={opt.buttonClass} data-name="certifyingAgency" data-value={opt.value} onclick={handleRadio}>
-                            <span class="acp-radio"></span>{opt.value}
-                        </button>
-                    </template>
-                </div>
-                <template if:true={showAgencyOther}>
-                    <input class="acp-input acp-mt" type="text" name="certifyingAgencyOther" value={form.certifyingAgencyOther} onchange={handleChange} placeholder="Other agency" />
-                </template>
-            </section>
-        </template>
-
-        <template if:true={showPage4}>
-            <section class="acp-banner">
-                <h2>Demographic Survey</h2>
-                <p>We ask these questions to help us know you. It is not for sale or sharing to any party.</p>
-            </section>
-
-            <section class="acp-card">
-                <label class="acp-label">Your ethnicity (check multiple as needed)</label>
-                <div class="acp-options acp-check">
-                    <template for:each={ethnicityChoices} for:item="opt">
-                        <label key={opt.value} class="acp-check-row">
-                            <input type="checkbox" value={opt.value} checked={opt.checked} onchange={handleChange} />
-                            <span>{opt.value}</span>
-                        </label>
-                    </template>
-                </div>
-                <template if:true={showEthnicityOther}>
-                    <input class="acp-input acp-mt" type="text" name="ethnicityOther" value={form.ethnicityOther} onchange={handleChange} placeholder="Other ethnicity" />
-                </template>
-            </section>
-
-            <section class="acp-card">
-                <label class="acp-label">Marital Status <abbr title="required">*</abbr></label>
-                <div class="acp-options">
-                    <template for:each={maritalOptions} for:item="opt">
-                        <button key={opt.value} type="button" class={opt.buttonClass} data-name="maritalStatus" data-value={opt.value} onclick={handleRadio}>
-                            <span class="acp-radio"></span>{opt.value}
-                        </button>
-                    </template>
-                </div>
-                <template if:true={showMaritalOther}>
-                    <input class="acp-input acp-mt" type="text" name="maritalStatusOther" value={form.maritalStatusOther} onchange={handleChange} placeholder="Other" />
-                </template>
-            </section>
-
-            <section class="acp-card">
-                <label class="acp-label">Sex at birth <abbr title="required">*</abbr></label>
-                <div class="acp-options">
-                    <template for:each={sexOptions} for:item="opt">
-                        <button key={opt.value} type="button" class={opt.buttonClass} data-name="sexAtBirth" data-value={opt.value} onclick={handleRadio}>
-                            <span class="acp-radio"></span>{opt.value}
-                        </button>
-                    </template>
-                </div>
-                <template if:true={showSexOther}>
-                    <input class="acp-input acp-mt" type="text" name="sexAtBirthOther" value={form.sexAtBirthOther} onchange={handleChange} placeholder="Other" />
-                </template>
-            </section>
-
-            <section class="acp-card">
-                <label class="acp-label">Employment Status <abbr title="required">*</abbr></label>
-                <div class="acp-options">
-                    <template for:each={employmentOptions} for:item="opt">
-                        <button key={opt.value} type="button" class={opt.buttonClass} data-name="employmentStatus" data-value={opt.value} onclick={handleRadio}>
-                            <span class="acp-radio"></span>{opt.value}
-                        </button>
-                    </template>
-                </div>
-                <template if:true={showEmploymentOther}>
-                    <input class="acp-input acp-mt" type="text" name="employmentStatusOther" value={form.employmentStatusOther} onchange={handleChange} placeholder="Other" />
-                </template>
-            </section>
-
-            <section class="acp-card">
-                <label class="acp-label">Highest Education Level <abbr title="required">*</abbr></label>
-                <div class="acp-options">
-                    <template for:each={educationOptions} for:item="opt">
-                        <button key={opt.value} type="button" class={opt.buttonClass} data-name="highestEducation" data-value={opt.value} onclick={handleRadio}>
-                            <span class="acp-radio"></span>{opt.value}
-                        </button>
-                    </template>
-                </div>
-                <template if:true={showEducationOther}>
-                    <input class="acp-input acp-mt" type="text" name="highestEducationOther" value={form.highestEducationOther} onchange={handleChange} placeholder="Other" />
-                </template>
-            </section>
-
-            <section class="acp-card">
-                <label class="acp-label">Have you taken CPR First Aid previously? <abbr title="required">*</abbr></label>
-                <div class="acp-options">
-                    <template for:each={cprOptions} for:item="opt">
-                        <button key={opt.value} type="button" class={opt.buttonClass} data-name="cprPreviously" data-value={opt.value} onclick={handleRadio}>
-                            <span class="acp-radio"></span>{opt.value}
-                        </button>
-                    </template>
-                </div>
-            </section>
-        </template>
-
-        <template if:true={showPage5}>
-            <section class="acp-banner">
-                <h2>Rescuer Readiness Survey</h2>
-                <p>
-                    The last few questions are used to determine how comfortable you are as a Rescuer.
-                    This information is just for us and is not shared with any other party.
-                    Please rate your agreement with the following statements:
-                </p>
-            </section>
-
-            <template for:each={readinessQuestions} for:item="q">
-                <section key={q.key} class="acp-card">
-                    <label class="acp-label">{q.label}</label>
-                    <div class="acp-likert">
-                        <span class="acp-likert-end">{q.left}</span>
-                        <div class="acp-likert-scale">
-                            <template for:each={q.options} for:item="opt">
-                                <button key={opt.value} type="button" class={opt.buttonClass} data-name={q.key} data-value={opt.value} onclick={handleRadio}>
-                                    <span class="acp-num">{opt.value}</span>
-                                    <span class="acp-radio"></span>
-                                </button>
+                    <template if:true={isComplete}>
+                        <div class="success" role="status">
+                            <template if:true={isInquiryMode}>
+                                <p>
+                                    Thanks - your class inquiry is in. We’ll review what you shared and follow up with
+                                    the best class option and how to enroll on the current schedule.
+                                </p>
+                            </template>
+                            <template if:true={isSeatMode}>
+                                <p>
+                                    Thanks - your registration for <strong>{result.className}</strong> is in. Seat reserved
+                                    <template if:true={result.agency}> under {result.agency}</template>.
+                                </p>
+                                <template if:true={result.confirmationCode}>
+                                    <p class="code-block">
+                                        Student access code:
+                                        <strong>{result.confirmationCode}</strong>
+                                    </p>
+                                </template>
+                                <template if:true={result.paymentLink}>
+                                    <p>
+                                        Complete payment here:
+                                        <a href={result.paymentLink} target="_blank" rel="noopener noreferrer"
+                                            >QuickBooks payment link</a
+                                        >
+                                    </p>
+                                </template>
+                                <template if:false={result.paymentLink}>
+                                    <p>We’ll email your QuickBooks payment link shortly.</p>
+                                </template>
                             </template>
                         </div>
-                        <span class="acp-likert-end">{q.right}</span>
-                    </div>
+                    </template>
+
+                    <template if:false={isComplete}>
+                        <!-- Inquiry mode: qualify which class is needed -->
+                        <template if:true={isInquiryMode}>
+                            <form class="form" onsubmit={handleSubmit}>
+                                <p class="help-lead">
+                                    Prefer to self-serve? Open the
+                                    <a href="https://allcareplus.enrollware.com/calendar" target="_blank" rel="noopener noreferrer"
+                                        >class calendar</a
+                                    >
+                                    to pick a time and register. Or tell us a little here and we’ll recommend a class.
+                                </p>
+                                <label class="full">
+                                    <span>Full name</span>
+                                    <input
+                                        type="text"
+                                        name="fullName"
+                                        required
+                                        value={inquiry.fullName}
+                                        onchange={handleText}
+                                    />
+                                </label>
+                                <label>
+                                    <span>Email</span>
+                                    <input type="email" name="email" required value={inquiry.email} onchange={handleText} />
+                                </label>
+                                <label>
+                                    <span>Mobile phone</span>
+                                    <input type="tel" name="phone" required value={inquiry.phone} onchange={handleText} />
+                                </label>
+
+                                <fieldset>
+                                    <legend>Which class are you closest to? (pick one or Not sure)</legend>
+                                    <template for:each={classInterestChoices} for:item="opt">
+                                        <label key={opt.value} class="choice">
+                                            <input
+                                                type="checkbox"
+                                                name="classInterests"
+                                                value={opt.value}
+                                                checked={opt.checked}
+                                                onchange={handleMulti}
+                                            />
+                                            <span>{opt.label}</span>
+                                        </label>
+                                    </template>
+                                </fieldset>
+
+                                <fieldset>
+                                    <legend>Preferred format</legend>
+                                    <template for:each={deliveryChoices} for:item="opt">
+                                        <label key={opt.value} class="choice">
+                                            <input
+                                                type="radio"
+                                                name="deliveryOption"
+                                                value={opt.value}
+                                                checked={opt.checked}
+                                                onchange={handleRadio}
+                                                required
+                                            />
+                                            <span>{opt.label}</span>
+                                        </label>
+                                    </template>
+                                </fieldset>
+
+                                <label class="full">
+                                    <span>Anything else? (optional)</span>
+                                    <textarea
+                                        name="additionalDetails"
+                                        rows="2"
+                                        value={inquiry.additionalDetails}
+                                        onchange={handleText}
+                                        placeholder="Deadline, group size, workplace requirement…"
+                                    ></textarea>
+                                </label>
+
+                                <template if:true={submitError}>
+                                    <p class="error" role="alert">{submitError}</p>
+                                </template>
+
+                                <button class="cta" type="submit" disabled={isSubmitting}>{submitLabel}</button>
+                            </form>
+                        </template>
+
+                        <!-- Seat mode: Salesforce registration (upcoming Enrollware replacement) -->
+                        <template if:true={isSeatMode}>
+                            <form class="form" onsubmit={handleSubmit}>
+                                <label>
+                                    <span>First Name</span>
+                                    <input type="text" name="firstName" required value={form.firstName} onchange={handleText} />
+                                </label>
+                                <label>
+                                    <span>Last Name</span>
+                                    <input type="text" name="lastName" required value={form.lastName} onchange={handleText} />
+                                </label>
+                                <label>
+                                    <span>Email Address</span>
+                                    <input type="email" name="email" required value={form.email} onchange={handleText} />
+                                </label>
+                                <label>
+                                    <span>Mobile Phone</span>
+                                    <input type="tel" name="phone" required value={form.phone} onchange={handleText} />
+                                </label>
+
+                                <fieldset>
+                                    <legend>Preferred contact method</legend>
+                                    <template for:each={preferredChoices} for:item="opt">
+                                        <label key={opt.value} class="choice">
+                                            <input
+                                                type="radio"
+                                                name="preferredContact"
+                                                value={opt.value}
+                                                checked={opt.checked}
+                                                onchange={handleRadio}
+                                                required
+                                            />
+                                            <span>{opt.label}</span>
+                                        </label>
+                                    </template>
+                                </fieldset>
+
+                                <fieldset>
+                                    <legend>Select class (AHA / ECSI seat inventory first)</legend>
+                                    <template if:true={loadingOfferings}>
+                                        <p class="help">Loading available classes…</p>
+                                    </template>
+                                    <template if:true={hasOfferings}>
+                                        <template for:each={offeringChoices} for:item="opt">
+                                            <label key={opt.id} class="choice">
+                                                <input
+                                                    type="radio"
+                                                    name="offeringId"
+                                                    value={opt.id}
+                                                    checked={opt.checked}
+                                                    disabled={opt.disabled}
+                                                    onchange={handleRadio}
+                                                    required
+                                                />
+                                                <span>{opt.label}</span>
+                                            </label>
+                                        </template>
+                                    </template>
+                                    <template if:false={hasOfferings}>
+                                        <template if:false={loadingOfferings}>
+                                            <p class="help">No active class seats are listed yet. Please contact us to register.</p>
+                                        </template>
+                                    </template>
+                                </fieldset>
+
+                                <fieldset>
+                                    <legend>Delivery option</legend>
+                                    <template for:each={deliveryChoices} for:item="opt">
+                                        <label key={opt.value} class="choice">
+                                            <input
+                                                type="radio"
+                                                name="deliveryOption"
+                                                value={opt.value}
+                                                checked={opt.checked}
+                                                onchange={handleRadio}
+                                                required
+                                            />
+                                            <span>{opt.label}</span>
+                                        </label>
+                                    </template>
+                                </fieldset>
+
+                                <label>
+                                    <span>Preferred class date</span>
+                                    <input type="date" name="classDate" required value={form.classDate} onchange={handleText} />
+                                </label>
+                                <label>
+                                    <span>Preferred class time</span>
+                                    <select name="classTime" required onchange={handleText}>
+                                        <option value="">Select a time</option>
+                                        <template for:each={timeChoices} for:item="opt">
+                                            <option key={opt.value} value={opt.value} selected={opt.selected}>{opt.label}</option>
+                                        </template>
+                                    </select>
+                                </label>
+
+                                <label class="full">
+                                    <span>Group / employer / school (or Individual)</span>
+                                    <input type="text" name="groupName" required value={form.groupName} onchange={handleText} />
+                                </label>
+
+                                <label class="full">
+                                    <span>Anything else about your training needs? (Optional)</span>
+                                    <textarea
+                                        name="trainingNotes"
+                                        rows="4"
+                                        value={form.trainingNotes}
+                                        onchange={handleText}
+                                        placeholder="Workplace requirement, renewal, group size, accessibility needs, etc."
+                                    ></textarea>
+                                </label>
+
+                                <template if:true={submitError}>
+                                    <p class="error" role="alert">{submitError}</p>
+                                </template>
+
+                                <button class="cta" type="submit" disabled={isSubmitting}>{submitLabel}</button>
+                            </form>
+                        </template>
+                    </template>
                 </section>
-            </template>
-
-            <section class="acp-card">
-                <label class="acp-label">I want to learn how Self-Care improves overall wellbeing <abbr title="required">*</abbr></label>
-                <div class="acp-options">
-                    <template for:each={selfCareOptions} for:item="opt">
-                        <button key={opt.value} type="button" class={opt.buttonClass} data-name="learnSelfCare" data-value={opt.value} onclick={handleRadio}>
-                            <span class="acp-radio"></span>{opt.value}
-                        </button>
-                    </template>
-                </div>
-            </section>
-
-            <section class="acp-card">
-                <label class="acp-label">I feel a 'self-care' support peer or guide would help. <abbr title="required">*</abbr></label>
-                <div class="acp-options">
-                    <template for:each={peerOptions} for:item="opt">
-                        <button key={opt.value} type="button" class={opt.buttonClass} data-name="selfCarePeerHelp" data-value={opt.value} onclick={handleRadio}>
-                            <span class="acp-radio"></span>{opt.value}
-                        </button>
-                    </template>
-                </div>
-                <template if:true={showPeerOther}>
-                    <input class="acp-input acp-mt" type="text" name="selfCarePeerOther" value={form.selfCarePeerOther} onchange={handleChange} placeholder="Other" />
-                </template>
-            </section>
-        </template>
-
-        <template if:true={showNav}>
-            <footer class="acp-nav">
-                <div class="acp-nav-actions">
-                    <template if:false={isFirstPage}>
-                        <button type="button" class="acp-btn acp-btn-ghost" onclick={handleBack} disabled={isSubmitting}>Back</button>
-                    </template>
-                    <button type="button" class="acp-btn acp-btn-primary" onclick={handleNext} disabled={isSubmitting}>{nextLabel}</button>
-                </div>
-                <div class="acp-progress-wrap">
-                    <div class="acp-progress"><div class="acp-progress-bar" style={progressStyle}></div></div>
-                    <span>{pageLabel}</span>
-                </div>
-                <button type="button" class="acp-clear" onclick={handleClear}>Clear form</button>
-            </footer>
-        </template>
+            </div>
+        </section>
     </div>
 </template>

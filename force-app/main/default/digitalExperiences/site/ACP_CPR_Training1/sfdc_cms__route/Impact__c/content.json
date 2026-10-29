@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "Impact",
+  "contentBody" : {
+    "activeViewId" : "impact",
+    "configurationTags" : [ ],
+    "pageAccess" : "Public",
+    "routeType" : "custom-impact",
+    "urlPrefix" : "impact"
+  },
+  "urlName" : "impact"
+}

@@ -1,0 +1,112 @@
+<template>
+    <div class="layout">
+        <aside class="visual" aria-hidden="true">
+            <img src={sideImage} alt="" />
+            <div class="visual-shade"></div>
+            <div class="visual-copy">
+                <p class="eyebrow">GET INVOLVED</p>
+                <h2>Your time moves the mission.</h2>
+                <p>Share your interest - we’ll match you with outreach, training, or behind-the-scenes roles.</p>
+            </div>
+        </aside>
+
+        <section class="form-shell">
+            <header class="intro">
+                <h2>Volunteer Interest Form</h2>
+                <p>
+                    Thank you for your interest in All Care Plus. Fill out this quick form and our team will reach out with
+                    upcoming opportunities.
+                </p>
+            </header>
+
+            <template if:true={isComplete}>
+                <div class="success" role="status">
+                    Thanks for getting in touch. We’ve received your interest form and will follow up within 48 hours.
+                </div>
+            </template>
+
+            <template if:false={isComplete}>
+                <form class="form" onsubmit={handleSubmit}>
+                    <label>
+                        <span>Full Name</span>
+                        <input type="text" name="fullName" required value={fullName} onchange={handleText} />
+                    </label>
+                    <label>
+                        <span>Email Address</span>
+                        <input type="email" name="email" required value={email} onchange={handleText} />
+                    </label>
+                    <label>
+                        <span>Phone Number</span>
+                        <input type="tel" name="phone" required value={phone} onchange={handleText} />
+                    </label>
+
+                    <fieldset>
+                        <legend>Preferred Way to Reach You</legend>
+                        <template for:each={preferredChoices} for:item="opt">
+                            <label key={opt.value} class="choice">
+                                <input
+                                    type="radio"
+                                    name="preferredContact"
+                                    value={opt.value}
+                                    checked={opt.checked}
+                                    onchange={handlePreferred}
+                                    required
+                                />
+                                <span>{opt.label}</span>
+                            </label>
+                        </template>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Which area sparks your interest most?</legend>
+                        <template for:each={interestChoices} for:item="opt">
+                            <label key={opt.value} class="choice">
+                                <input
+                                    type="checkbox"
+                                    name="interestAreas"
+                                    value={opt.value}
+                                    checked={opt.checked}
+                                    onchange={handleMulti}
+                                />
+                                <span>{opt.label}</span>
+                            </label>
+                        </template>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>What is your general availability?</legend>
+                        <template for:each={availabilityChoices} for:item="opt">
+                            <label key={opt.value} class="choice">
+                                <input
+                                    type="checkbox"
+                                    name="availability"
+                                    value={opt.value}
+                                    checked={opt.checked}
+                                    onchange={handleMulti}
+                                />
+                                <span>{opt.label}</span>
+                            </label>
+                        </template>
+                    </fieldset>
+
+                    <label class="full">
+                        <span>Anything specific you’d like us to know? (Optional)</span>
+                        <textarea
+                            name="additionalDetails"
+                            rows="4"
+                            value={additionalDetails}
+                            onchange={handleText}
+                            placeholder="Tell us about a skill you’d like to share or why you’re excited about All Care Plus."
+                        ></textarea>
+                    </label>
+
+                    <template if:true={errorMessage}>
+                        <p class="error" role="alert">{errorMessage}</p>
+                    </template>
+
+                    <button class="cta" type="submit" disabled={isSubmitting}>{submitLabel}</button>
+                </form>
+            </template>
+        </section>
+    </div>
+</template>

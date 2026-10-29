@@ -1,0 +1,59 @@
+<template>
+    <div class="site">
+        <c-acp-site-nav active-page="donate"></c-acp-site-nav>
+
+        <section class="hero">
+            <img class="hero-bg" src={media.hero} alt="" />
+            <div class="hero-shade"></div>
+            <div class="hero-copy">
+                <p class="eyebrow">DONATE</p>
+                <h1>Help more people care for themselves - and respond when it matters.</h1>
+                <p>
+                    Your gift expands Accept &amp; Grow, CPR &amp; First Aid training, and free Peer Support across San
+                    Mateo and Santa Clara counties.
+                </p>
+                <a class="donate-btn" href={donateUrl} target="_blank" rel="noopener noreferrer">
+                    Donate Now
+                </a>
+                <p class="donate-hint">Opens a secure donation request so we can send your QuickBooks payment link</p>
+            </div>
+        </section>
+
+        <section class="body reveal" data-reveal>
+            <p class="eyebrow dark">IMPACT</p>
+            <h2>Where your support goes</h2>
+            <div class="grid">
+                <article>
+                    <span class="icon" aria-hidden="true"></span>
+                    <h3>Accept &amp; Grow</h3>
+                    <p>Expand weekly drop-ins and youth emotional resilience support.</p>
+                </article>
+                <article>
+                    <span class="icon" aria-hidden="true"></span>
+                    <h3>CPR &amp; First Aid</h3>
+                    <p>Fund hands-on classes for schools, families, and workplaces.</p>
+                </article>
+                <article>
+                    <span class="icon" aria-hidden="true"></span>
+                    <h3>Peer Support</h3>
+                    <p>Bring free support to local events so help is easy to find.</p>
+                </article>
+            </div>
+            <div class="donate-panel">
+                <h3>Ready to give?</h3>
+                <p>Click below and we’ll follow up with a secure QuickBooks Payments link for your gift.</p>
+                <a class="donate-btn solid" href={donateUrl} target="_blank" rel="noopener noreferrer">
+                    Donate Now
+                </a>
+            </div>
+            <p class="note">
+                Prefer another way? Email
+                <a href="mailto:ramesh@allcareplus.org">ramesh@allcareplus.org</a>
+                or call
+                <a href="tel:+16504240204">(650) 424-0204</a>.
+            </p>
+        </section>
+
+        <c-acp-site-footer></c-acp-site-footer>
+    </div>
+</template>

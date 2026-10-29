@@ -1,0 +1,67 @@
+{
+  "type" : "sfdc_cms__view",
+  "title" : "Get Involved",
+  "contentBody" : {
+    "component" : {
+      "children" : [ {
+        "children" : [ {
+          "attributes" : {
+            "backgroundImageConfig" : "",
+            "backgroundImageOverlay" : "rgba(0,0,0,0)",
+            "componentSpacerSize" : "",
+            "layoutDirectionDesktop" : "row",
+            "layoutDirectionMobile" : "column",
+            "layoutDirectionTablet" : "column",
+            "maxContentWidth" : "",
+            "sectionColumnGutterWidth" : "",
+            "sectionConfig" : "{\"UUID\":\"a3404e33-3eed-475a-8339-cf26eaa8049c\",\"columns\":[{\"UUID\":\"5e632e12-b141-443a-8c11-e1ffdd49f4d4\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":null}]}",
+            "sectionMinHeight" : "",
+            "sectionVerticalAlign" : "flex-start"
+          },
+          "children" : [ {
+            "children" : [ {
+              "attributes" : { },
+              "definition" : "c:acpImpactPage",
+              "id" : "da0c020e-a43f-4330-8994-5deb97d3cffc",
+              "type" : "component"
+            } ],
+            "id" : "777ebed6-e672-4b2d-9958-55261bbe6546",
+            "name" : "col1",
+            "title" : "Column 1",
+            "type" : "region"
+          } ],
+          "definition" : "community_layout:section",
+          "id" : "b920464e-d46b-43c3-bd8f-5947ca120d73",
+          "type" : "component"
+        } ],
+        "id" : "e54c0deb-696b-49d0-ab89-cc610ac75a87",
+        "name" : "content",
+        "title" : "Content",
+        "type" : "region"
+      }, {
+        "children" : [ {
+          "attributes" : {
+            "customHeadTags" : "",
+            "description" : "Get involved with All Care Plus: current issues, impact, and volunteer positions",
+            "pageTitle" : "Get Involved | All Care Plus",
+            "recordId" : "{!recordId}"
+          },
+          "definition" : "community_builder:seoAssistant",
+          "id" : "6f500bfe-9b7d-480f-ad4f-fecb60953f06",
+          "type" : "component"
+        } ],
+        "id" : "5ab23d97-2ab0-42c3-af74-d57abdacdf61",
+        "name" : "sfdcHiddenRegion",
+        "title" : "sfdcHiddenRegion",
+        "type" : "region"
+      } ],
+      "definition" : "community_layout:sldsFlexibleLayout",
+      "id" : "0a55d498-c313-48c1-804a-ee429599f37f",
+      "type" : "component"
+    },
+    "dataProviders" : [ ],
+    "themeLayoutType" : "Inner",
+    "viewType" : "custom-impact"
+  },
+  "urlName" : "get-involved"
+}

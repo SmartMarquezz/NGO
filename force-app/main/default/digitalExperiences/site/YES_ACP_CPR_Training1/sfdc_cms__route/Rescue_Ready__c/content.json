@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "CPR First Aid Classes",
+  "contentBody" : {
+    "activeViewId" : "rescueReady",
+    "configurationTags" : [ ],
+    "pageAccess" : "Public",
+    "routeType" : "custom-rescue-ready",
+    "urlPrefix" : "cpr-classes"
+  },
+  "urlName" : "cpr-classes"
+}

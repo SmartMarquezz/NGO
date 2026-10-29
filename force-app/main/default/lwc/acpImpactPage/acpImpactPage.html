@@ -1,0 +1,73 @@
+<template>
+    <div class="site">
+        <c-acp-site-nav active-page="involved"></c-acp-site-nav>
+
+        <section class="hero">
+            <img class="hero-bg" src={media.hero} alt="" />
+            <div class="hero-shade"></div>
+            <div class="hero-copy">
+                <p class="eyebrow">GET INVOLVED</p>
+                <h1>Support the work. Join the team. Grow the impact.</h1>
+                <p>Current issues, real stories, and volunteer paths - all connected to how All Care Plus serves.</p>
+            </div>
+        </section>
+
+        <section class="section reveal" data-reveal data-anchor="current-issues" id="current-issues">
+            <p class="eyebrow dark">CURRENT ISSUES</p>
+            <h2>What our community is up against</h2>
+            <div class="issue-grid">
+                <article><h3>Safety readiness gaps</h3><p>Too few people feel confident starting CPR or First Aid when seconds matter.</p></article>
+                <article><h3>Caregiver burnout</h3><p>Families and helpers need practical self-care tools, not one-time advice.</p></article>
+                <article><h3>Local access</h3><p>Support should show up in community spaces - free, welcoming, easy to find.</p></article>
+            </div>
+        </section>
+
+        <section class="section alt reveal" data-reveal data-anchor="support-impact" id="support-impact">
+            <p class="eyebrow dark">SUPPORT IMPACT</p>
+            <h2>Serving since 2002</h2>
+            <div class="stat-grid">
+                <template for:each={stats} for:item="stat">
+                    <article key={stat.key}><strong>{stat.value}</strong><span>{stat.label}</span></article>
+                </template>
+            </div>
+            <div class="story-grid">
+                <template for:each={stories} for:item="story">
+                    <blockquote key={story.key}><p>“{story.quote}”</p><cite>{story.name}</cite></blockquote>
+                </template>
+            </div>
+            <button class="cta" type="button" onclick={handleDonate}>Donate Now</button>
+        </section>
+
+        <section class="section reveal" data-reveal data-anchor="difference" id="difference">
+            <p class="eyebrow dark">THE DIFFERENCE</p>
+            <h2>How the work shows up in real lives</h2>
+            <div class="diff-grid">
+                <template for:each={examples} for:item="ex">
+                    <article key={ex.key}><h3>{ex.title}</h3><p>{ex.body}</p></article>
+                </template>
+            </div>
+        </section>
+
+        <section class="section reveal" data-reveal data-anchor="volunteer" id="volunteer">
+            <div class="split">
+                <img src={media.volunteer} alt="Volunteers serving with All Care Plus" />
+                <div>
+                    <p class="eyebrow dark">VOLUNTEER</p>
+                    <h2>Positions that move the mission</h2>
+                    <p>Share your interest and we’ll reach out with opportunities across San Mateo and Santa Clara counties.</p>
+                    <ul>
+                        <li>Accept &amp; Grow program support</li>
+                        <li>Plus Rescuer / CPR awareness events</li>
+                        <li>Community outreach at fairs and schools</li>
+                        <li>Behind-the-scenes tech, design, and admin help</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="form-wrap" id="volunteer-form">
+                <c-acp-volunteer-interest-form></c-acp-volunteer-interest-form>
+            </div>
+        </section>
+
+        <c-acp-site-footer></c-acp-site-footer>
+    </div>
+</template>

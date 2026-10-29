@@ -1,0 +1,67 @@
+{
+  "type" : "sfdc_cms__view",
+  "title" : "Donate Now",
+  "contentBody" : {
+    "component" : {
+      "children" : [ {
+        "children" : [ {
+          "attributes" : {
+            "backgroundImageConfig" : "",
+            "backgroundImageOverlay" : "rgba(0,0,0,0)",
+            "componentSpacerSize" : "",
+            "layoutDirectionDesktop" : "row",
+            "layoutDirectionMobile" : "column",
+            "layoutDirectionTablet" : "column",
+            "maxContentWidth" : "",
+            "sectionColumnGutterWidth" : "",
+            "sectionConfig" : "{\"UUID\":\"a11b22c3-d44e-4f55-9667-7889900aa1b2\",\"columns\":[{\"UUID\":\"b22c33d4-e55f-4667-a778-8990011bb2c3\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":null}]}",
+            "sectionMinHeight" : "",
+            "sectionVerticalAlign" : "flex-start"
+          },
+          "children" : [ {
+            "children" : [ {
+              "attributes" : { },
+              "definition" : "c:acpDonatePage",
+              "id" : "c33d44e5-f66a-4778-b889-9001122cc3d4",
+              "type" : "component"
+            } ],
+            "id" : "b22c33d4-e55f-4667-a778-8990011bb2c3",
+            "name" : "col1",
+            "title" : "Column 1",
+            "type" : "region"
+          } ],
+          "definition" : "community_layout:section",
+          "id" : "a11b22c3-d44e-4f55-9667-7889900aa1b2",
+          "type" : "component"
+        } ],
+        "id" : "d44e55f6-a77b-4889-c990-0112233dd4e5",
+        "name" : "content",
+        "title" : "Content",
+        "type" : "region"
+      }, {
+        "children" : [ {
+          "attributes" : {
+            "customHeadTags" : "",
+            "description" : "Donate to All Care Plus and support self-care and safety training",
+            "pageTitle" : "Donate Now | All Care Plus",
+            "recordId" : "{!recordId}"
+          },
+          "definition" : "community_builder:seoAssistant",
+          "id" : "e55f66a7-b88c-4990-d001-1223344ee5f6",
+          "type" : "component"
+        } ],
+        "id" : "f66a77b8-c99d-4001-e112-2334455ff607",
+        "name" : "sfdcHiddenRegion",
+        "title" : "sfdcHiddenRegion",
+        "type" : "region"
+      } ],
+      "definition" : "community_layout:sldsFlexibleLayout",
+      "id" : "a77b88c9-d00e-4112-f223-3445566aa708",
+      "type" : "component"
+    },
+    "dataProviders" : [ ],
+    "themeLayoutType" : "Inner",
+    "viewType" : "custom-donate-now"
+  },
+  "urlName" : "donate"
+}

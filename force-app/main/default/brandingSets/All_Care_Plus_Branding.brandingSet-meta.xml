@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BrandingSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <brandingSetProperty>
+        <propertyName>brandColor</propertyName>
+        <propertyValue>#0A1E3C</propertyValue>
+    </brandingSetProperty>
+    <brandingSetProperty>
+        <propertyName>headerColor</propertyName>
+        <propertyValue>#FFFFFF</propertyValue>
+    </brandingSetProperty>
+    <brandingSetProperty>
+        <propertyName>pageBackgroundColor</propertyName>
+        <propertyValue>#FDF9F5</propertyValue>
+    </brandingSetProperty>
+    <brandingSetProperty>
+        <propertyName>logoName</propertyName>
+        <propertyValue>AllCarePlus_App_Logo</propertyValue>
+    </brandingSetProperty>
+    <masterLabel>All Care Plus Branding</masterLabel>
+</BrandingSet>

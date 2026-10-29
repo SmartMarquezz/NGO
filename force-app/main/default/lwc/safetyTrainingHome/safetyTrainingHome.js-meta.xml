@@ -2,8 +2,8 @@
 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>63.0</apiVersion>
     <isExposed>true</isExposed>
-    <masterLabel>Safety Training Home</masterLabel>
-    <description>All Care Plus branded B2C home with Enroll Now CTA</description>
+    <masterLabel>CPR First Aid Classes</masterLabel>
+    <description>All Care Plus CPR First Aid Classes and Rescue Prep page</description>
     <targets>
         <target>lightningCommunity__Page</target>
         <target>lightningCommunity__Default</target>

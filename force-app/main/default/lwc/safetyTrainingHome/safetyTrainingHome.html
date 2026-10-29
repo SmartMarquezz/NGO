@@ -1,134 +1,220 @@
 <template>
     <div class="site">
+        <c-acp-site-nav active-page="services"></c-acp-site-nav>
+
         <section class="hero">
-            <img class="hero-img" src={media.hero} alt="CPR training practice with hands-on coaching" />
+            <img class="hero-bg" src={media.banner} alt="Hands-on CPR and First Aid practice" />
             <div class="hero-shade"></div>
-            <div class="hero-content">
-                <p class="brand">ALL CARE PLUS</p>
-                <h1>Be ready for the moments that matter.</h1>
-                <p class="lede">CPR, AED, and First Aid training that helps you act with calm hands and a clear mind.</p>
-                <div class="cta-row">
-                    <button class="cta" type="button" onclick={handleEnroll}>ENROLL NOW</button>
-                    <span class="cta-note">Classroom skills · Trusted agencies · Community-ready</span>
+            <div class="hero-copy">
+                <p class="eyebrow">2 · CPR &amp; FIRST AID</p>
+                <h1>Build The Skills To Respond With Confidence.</h1>
+                <p>
+                    Pick a class, check open times on the calendar, and register — confirmation comes from Enrollware.
+                    Not sure which class? Use the short inquiry below.
+                </p>
+                <div class="hero-actions">
+                    <button class="cta" type="button" onclick={handleOpenEnrollware}>View calendar &amp; register</button>
+                    <button class="cta ghost" type="button" onclick={handleInquiry}>Need help choosing?</button>
                 </div>
             </div>
         </section>
 
-        <nav class="course-bar" aria-label="Training focus">
-            <span>CPR</span>
-            <span>AED</span>
-            <span>First Aid</span>
-            <span>BLS</span>
-            <span>Workplace</span>
-            <span>Family &amp; Community</span>
-        </nav>
-
-        <section class="intro">
-            <div class="intro-copy">
-                <h2>Lifesaving training, built for real people</h2>
+        <section class="calendar-first reveal" data-reveal id="calendar">
+            <div>
+                <p class="eyebrow dark">CLASS CALENDAR</p>
+                <h2>Check dates, seats, and register in one place</h2>
                 <p>
-                    Inspired by the clarity of national programs like the Red Cross — adapted for All Care Plus.
-                    You’ll practice the skills, hear the coaching, and leave ready to help at home, at work, and in your neighborhood.
+                    Live schedule and enrollment run through Enrollware today — pick a class, choose a time, register,
+                    and you’ll get a confirmation email. Salesforce will own this step at cutover.
                 </p>
-                <button class="cta cta-secondary" type="button" onclick={handleEnroll}>Take a CPR Class</button>
             </div>
-            <div class="intro-photo">
-                <img src={media.team} alt="Care team prepared to respond together" />
+            <div class="calendar-actions">
+                <button class="cta" type="button" onclick={handleOpenEnrollware}>Open class calendar</button>
+                <a class="text-link" href={enrollwareUrl} target="_blank" rel="noopener noreferrer"
+                    >Direct calendar link ›</a
+                >
             </div>
         </section>
 
-        <section class="offerings">
-            <div class="section-head">
-                <h2>Choose your training path</h2>
-                <p>Clear options. Hands-on practice. Certification pathways through trusted agencies.</p>
+        <section class="guide reveal" data-reveal>
+            <div class="guide-head">
+                <p class="eyebrow dark">EXPLORE CPR &amp; FIRST AID</p>
+                <h2>Why it matters · What’s included · When · How to register</h2>
             </div>
-            <div class="offer-grid">
-                <template for:each={courses} for:item="course">
-                    <article key={course.key} class="offer">
-                        <img src={course.image} alt={course.alt} />
-                        <div class="offer-body">
+            <div class="guide-grid">
+                <article>
+                    <span class="guide-label">Why it’s important</span>
+                    <h3>Ready hands save lives</h3>
+                    <p>
+                        CPR and First Aid turn bystanders into capable responders. Training builds calm under pressure
+                        for workplaces, schools, families, and community groups.
+                    </p>
+                </article>
+                <article>
+                    <span class="guide-label">Components</span>
+                    <h3>What you can take</h3>
+                    <ul>
+                        <li>Basic Life Support (BLS)</li>
+                        <li>Adult &amp; Pediatric CPR / AED / First Aid</li>
+                        <li>HeartSaver and First Aid-only paths</li>
+                        <li>In-person, blended, virtual, and online formats</li>
+                    </ul>
+                </article>
+                <article>
+                    <span class="guide-label">When it’s offered</span>
+                    <h3>Open calendar seats</h3>
+                    <p>
+                        Public and group classes run on a rolling calendar. Live dates and seats are in Enrollware today;
+                        Salesforce will own scheduling at cutover.
+                    </p>
+                </article>
+                <article>
+                    <span class="guide-label">How to get involved</span>
+                    <h3>Enroll or ask</h3>
+                    <p>
+                        Pick a class and open Enrollware for dates, or submit the inquiry form if you need a
+                        recommendation. Group and mobile sessions are available on request.
+                    </p>
+                    <button class="cta compact" type="button" onclick={handleBrowseClasses}>Browse classes</button>
+                </article>
+            </div>
+        </section>
+
+        <section class="delivery reveal" data-reveal id="delivery">
+            <p class="eyebrow dark">DELIVERY OPTIONS</p>
+            <h2>Flexible Learning Options</h2>
+            <p class="section-lead">Choose the format that works best for your schedule and goals.</p>
+            <div class="option-grid option-grid-4">
+                <article>
+                    <img src={media.practice} alt="In-person instructor-led CPR skills" />
+                    <div>
+                        <h3>In-Person</h3>
+                        <p>Instructor-led training with hands-on practice throughout the class.</p>
+                    </div>
+                </article>
+                <article>
+                    <img src={media.blended} alt="Blended learning path for CPR certification" />
+                    <div>
+                        <h3>Blended</h3>
+                        <p>Mostly online learning with a focused in-person skills session to complete certification.</p>
+                    </div>
+                </article>
+                <article>
+                    <img src={media.virtual} alt="Virtual CPR and First Aid learning session" />
+                    <div>
+                        <h3>Virtual</h3>
+                        <p>Live online instruction when travel isn’t practical - skills completion as required by the course path.</p>
+                    </div>
+                </article>
+                <article>
+                    <img src={media.online} alt="Self-paced online CPR coursework" />
+                    <div>
+                        <h3>Online</h3>
+                        <p>Self-paced online coursework for eligible paths, with skills check-ins when certification requires them.</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="classes reveal" data-reveal id="classes" data-section="classes">
+            <p class="eyebrow dark">CLASS OPTIONS</p>
+            <h2>Explore Our CPR And First Aid Classes</h2>
+            <p class="section-lead">
+                Details for each class are below. Current open seats and dates are managed in Enrollware until Salesforce
+                fully replaces that step.
+            </p>
+            <div class="class-grid">
+                <template for:each={classes} for:item="course">
+                    <article key={course.key} class="class-card">
+                        <div class="shot">
+                            <img src={course.image} alt={course.alt} />
+                        </div>
+                        <div class="class-body">
                             <h3>{course.title}</h3>
-                            <p>{course.detail}</p>
-                            <button class="text-link" type="button" onclick={handleEnroll}>Enroll in this path</button>
+                            <p class="class-summary">{course.note}</p>
+                            <ul class="class-details">
+                                <li><strong>Who it’s for:</strong> {course.audience}</li>
+                                <li><strong>Format:</strong> {course.format}</li>
+                                <li><strong>Length:</strong> {course.length}</li>
+                                <li><strong>You’ll practice:</strong> {course.includes}</li>
+                            </ul>
+                            <a class="cta class-cta" href={course.enrollwareUrl} target="_blank" rel="noopener noreferrer"
+                                >View dates &amp; enroll</a
+                            >
                         </div>
                     </article>
                 </template>
             </div>
-        </section>
 
-        <section class="formats">
-            <div class="section-head light">
-                <h2>How you’ll learn</h2>
-                <p>Pick the format that fits your life — then show up ready to practice.</p>
-            </div>
-            <div class="format-grid">
-                <template for:each={formats} for:item="format">
-                    <article key={format.key}>
-                        <h3>{format.title}</h3>
-                        <p>{format.detail}</p>
-                    </article>
-                </template>
+            <div class="enrollware-band">
+                <div>
+                    <p class="eyebrow dark">CURRENT SCHEDULE</p>
+                    <h3>Open the full class calendar</h3>
+                    <p>
+                        See live dates, seats, and register with the current Enrollware calendar. We’ll move this into
+                        Salesforce when the cutover is ready.
+                    </p>
+                </div>
+                <button class="cta" type="button" onclick={handleOpenEnrollware}>Open Enrollware calendar</button>
             </div>
         </section>
 
-        <section class="expect">
-            <div class="expect-photo">
-                <img src={media.manikin} alt="Close-up of CPR practice during class" />
-            </div>
-            <div class="expect-copy">
-                <h2>What happens in class</h2>
+        <section class="resources reveal" data-reveal id="resources">
+            <div>
+                <p class="eyebrow dark">RESOURCES</p>
+                <h2>Helpful Resources For Your Training</h2>
                 <ul>
-                    <li>Recognize cardiac arrest and call for help with confidence</li>
-                    <li>Deliver high-quality chest compressions and rescue breaths</li>
-                    <li>Use an AED without hesitation</li>
-                    <li>Handle choking, bleeding, burns, and sudden medical emergencies</li>
-                    <li>Leave with a plan for the minutes before professionals arrive</li>
+                    <li>What to bring and how to prepare for skills day</li>
+                    <li>Which class fits your workplace or school requirement</li>
+                    <li>Group and organizational scheduling support</li>
                 </ul>
-                <button class="cta" type="button" onclick={handleEnroll}>ENROLL NOW</button>
             </div>
+            <img src={media.resources} alt="Helping hands connecting in warm sunlight" />
         </section>
 
-        <section class="moments">
-            <div class="section-head">
-                <h2>Training that fits the way you live</h2>
-                <p>All Care Plus is a volunteer-managed nonprofit. We train people who want to protect their families, teams, and communities.</p>
-            </div>
-            <div class="moment-grid">
-                <template for:each={moments} for:item="moment">
-                    <figure key={moment.key}>
-                        <img src={moment.image} alt={moment.alt} />
-                        <figcaption>
-                            <strong>{moment.title}</strong>
-                            <span>{moment.detail}</span>
-                        </figcaption>
-                    </figure>
-                </template>
-            </div>
+        <section class="inquiry-wrap" id="register" data-inquiry data-register data-section="inquiry">
+            <header class="inquiry-head">
+                <p class="eyebrow dark">SECONDARY OPTION</p>
+                <h2>Not sure which class you need?</h2>
+                <p>
+                    Fill out this short inquiry. We’ll review your answers and recommend the right class, format, and
+                    next step - including Enrollware registration when a seat is ready.
+                </p>
+            </header>
+            <c-safety-enrollment-form embed-mode="true" form-mode="inquiry"></c-safety-enrollment-form>
         </section>
 
-        <section class="trust">
-            <div>
-                <strong>Authorized provider pathways</strong>
-                <span>American Heart Association · American Red Cross · and more</span>
-            </div>
-            <div>
-                <strong>Skills that stick</strong>
-                <span>Hands-on practice, not just slides</span>
-            </div>
-            <div>
-                <strong>Rescuer wellbeing</strong>
-                <span>Self-care support built into the All Care Plus journey</span>
-            </div>
+        <section class="seat-wrap" id="seat" data-seat data-section="seat">
+            <details class="seat-details">
+                <summary>Salesforce seat reservation form (internal / upcoming cutover)</summary>
+                <p class="seat-note">
+                    This is the Salesforce registration flow we’ll use when Enrollware is replaced. Keep using Enrollware
+                    for current open classes above.
+                </p>
+                <c-safety-enrollment-form embed-mode="true" form-mode="seat"></c-safety-enrollment-form>
+            </details>
         </section>
 
-        <section class="close">
-            <img class="close-img" src={media.close} alt="Healthcare professional ready to help" />
-            <div class="close-shade"></div>
-            <div class="close-content">
-                <h2>Ready when it counts.</h2>
-                <p>Enroll in All Care Plus Safety Training and build the confidence to act.</p>
-                <button class="cta" type="button" onclick={handleEnroll}>ENROLL NOW</button>
-            </div>
+        <section
+            class="full-enroll-wrap"
+            id="full-registration"
+            data-full-registration
+            data-section="full-registration"
+        >
+            <header class="inquiry-head">
+                <p class="eyebrow dark">FULL CPR REGISTRATION</p>
+                <h2>Complete Safety Training enrollment</h2>
+                <p>
+                    Capture the full client profile here - class details, contact info, demographics, and wellness
+                    questions. It saves as a Safety Enrollment and links to a Salesforce Contact.
+                </p>
+            </header>
+            <c-acp-full-enrollment-form
+                headline="Safety Training Enrollment"
+                embed-mode="true"
+            ></c-acp-full-enrollment-form>
         </section>
+
+        <c-acp-site-footer></c-acp-site-footer>
     </div>
 </template>

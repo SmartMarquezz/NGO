@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "Volunteer",
+  "contentBody" : {
+    "activeViewId" : "volunteer",
+    "configurationTags" : [ ],
+    "pageAccess" : "Public",
+    "routeType" : "custom-volunteer",
+    "urlPrefix" : "volunteer"
+  },
+  "urlName" : "volunteer"
+}

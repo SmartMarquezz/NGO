@@ -1,0 +1,83 @@
+<template>
+    <div class="site">
+        <c-acp-site-nav active-page="about"></c-acp-site-nav>
+
+        <section class="hero">
+            <img class="hero-bg" src={media.history} alt="" />
+            <div class="hero-shade"></div>
+            <div class="hero-copy">
+                <p class="eyebrow">ABOUT US</p>
+                <h1>Built on a simple idea: care for yourself, then be ready for others.</h1>
+                <p>From Palo Alto in 2002 to communities worldwide - All Care Plus grows people who can grow communities.</p>
+            </div>
+        </section>
+
+        <section class="mission reveal" data-reveal data-anchor="mission" id="mission">
+            <div class="logo-wrap"><img class="logo" src={media.logo} alt="All Care Plus logo" /></div>
+            <div>
+                <p class="eyebrow dark">MISSION &amp; VISION</p>
+                <h2>Why we exist</h2>
+                <p><strong>Mission.</strong> Promote self-care awareness as the foundation for personal and community well-being, supported by First Aid and CPR training that empowers people to respond with confidence and compassion.</p>
+                <p><strong>Vision.</strong> A world where self-care and safety training are accessible to all - building resilience, quality of life, and compassionate community members.</p>
+            </div>
+        </section>
+
+        <section class="history reveal" data-reveal data-anchor="history" id="history">
+            <img src={media.history} alt="All Care Plus founders and history" />
+            <div>
+                <p class="eyebrow dark">OUR STORY</p>
+                <h2>History</h2>
+                <p>
+                    Founded in Palo Alto in 2002 by Ramesh Azariah and his father Francis Azariah. They saw the value of
+                    helping caregivers take better care of themselves - an idea that sprang from First Aid CPR training
+                    already being offered.
+                </p>
+                <p>
+                    A rescuer, by definition, knows how to care for themselves first before caring for others. That insight
+                    still guides every All Care Plus program today.
+                </p>
+            </div>
+        </section>
+
+        <section class="board reveal" data-reveal data-anchor="board" id="board">
+            <p class="eyebrow dark">LEADERSHIP</p>
+            <h2>Board Members</h2>
+            <div class="board-grid">
+                <template for:each={board} for:item="member">
+                    <article key={member.key}>
+                        <div class="avatar" aria-hidden="true">{member.initials}</div>
+                        <strong>{member.name}</strong>
+                        <span>{member.title}</span>
+                    </article>
+                </template>
+            </div>
+        </section>
+
+        <section class="committees reveal" data-reveal data-anchor="committees" id="committees">
+            <img src={media.team} alt="All Care Plus team and volunteers" />
+            <div>
+                <p class="eyebrow dark">HOW WE WORK</p>
+                <h2>Committees</h2>
+                <ul>
+                    <template for:each={committees} for:item="item">
+                        <li key={item.key}>{item.name}</li>
+                    </template>
+                </ul>
+            </div>
+        </section>
+
+        <section class="involved reveal" data-reveal data-anchor="get-involved" id="get-involved">
+            <p class="eyebrow dark">GET INVOLVED</p>
+            <h2>Volunteer with Peer Support</h2>
+            <p>
+                Help show up where people already gather — schools, fairs, and neighborhood events. Start with a short
+                interest form.
+            </p>
+            <button class="cta" type="button" data-path="/get-involved#volunteer" onclick={handlePath}>
+                Volunteer interest
+            </button>
+        </section>
+
+        <c-acp-site-footer></c-acp-site-footer>
+    </div>
+</template>

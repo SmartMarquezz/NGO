@@ -1,0 +1,109 @@
+<template>
+    <div class="site">
+        <c-acp-site-nav active-page="services"></c-acp-site-nav>
+
+        <section class="hero">
+            <img class="hero-bg" src={media.hero} alt="" />
+            <div class="hero-shade"></div>
+            <div class="hero-copy">
+                <p class="eyebrow">1 · ACCEPT &amp; GROW</p>
+                <h1>Support Today For A Stronger Tomorrow.</h1>
+                <p>
+                    Weekly drop-ins, prevention pathways, and self-care resources — pick a path and sign up in under a
+                    minute.
+                </p>
+                <div class="hero-actions">
+                    <button class="cta" type="button" data-hash="drop-in" onclick={handleDirectSignup}>
+                        Weekly Drop-In signup
+                    </button>
+                    <button class="cta ghost" type="button" data-hash="prevention" onclick={handleDirectSignup}>
+                        Prevention pathway
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="paths reveal" data-reveal>
+            <div class="paths-head">
+                <p class="eyebrow dark">DIRECT SIGNUP LINKS</p>
+                <h2>Share these links in ads or with partners</h2>
+                <p>Each card jumps straight to a short pre-qual form — less friction, faster follow-up.</p>
+            </div>
+            <div class="path-grid">
+                <article id="drop-in">
+                    <span class="num">A</span>
+                    <h3>Weekly Drop-In</h3>
+                    <p>Self-help / resilience circles for all ages. Sign up and we’ll confirm the next open session.</p>
+                    <button class="cta compact" type="button" data-hash="drop-in" onclick={handleDirectSignup}>
+                        Sign up for Drop-In
+                    </button>
+                </article>
+                <article id="prevention">
+                    <span class="num">B</span>
+                    <h3>Suicide Prevention</h3>
+                    <p>Awareness pathways and connection to help. Crisis: call/text 988.</p>
+                    <button class="cta compact" type="button" data-hash="prevention" onclick={handleDirectSignup}>
+                        Sign up for Prevention
+                    </button>
+                </article>
+                <article id="resources">
+                    <span class="num">C</span>
+                    <h3>Self-Care Resources</h3>
+                    <p>Tools and follow-up resources for Accept &amp; Grow participants and partners.</p>
+                    <button class="cta compact" type="button" data-hash="resources" onclick={handleDirectSignup}>
+                        Request Resources
+                    </button>
+                </article>
+            </div>
+        </section>
+
+        <section class="guide reveal" data-reveal>
+            <div class="guide-head">
+                <p class="eyebrow dark">EXPLORE ACCEPT &amp; GROW</p>
+                <h2>Why it matters · What’s included · When · How to join</h2>
+            </div>
+            <div class="guide-grid">
+                <article>
+                    <span class="guide-label">Why it’s important</span>
+                    <h3>Self-care fuels readiness</h3>
+                    <p>
+                        Stress, habits, and emotional balance shape how people show up. Accept &amp; Grow builds the
+                        foundation before rescue skills and peer support.
+                    </p>
+                </article>
+                <article>
+                    <span class="guide-label">Components</span>
+                    <h3>What you get</h3>
+                    <ul>
+                        <li>Weekly drop-in support circles</li>
+                        <li>Suicide-prevention awareness pathways</li>
+                        <li>Practical self-care tools and resources</li>
+                        <li>Peer certification paths for helpers</li>
+                    </ul>
+                </article>
+                <article>
+                    <span class="guide-label">When it’s offered</span>
+                    <h3>Ongoing drop-ins</h3>
+                    <p>
+                        Weekly sessions in Palo Alto and partner locations. Register interest and we’ll confirm the next
+                        open circle.
+                    </p>
+                </article>
+                <article>
+                    <span class="guide-label">How to get involved</span>
+                    <h3>Use a direct signup</h3>
+                    <p>Pick Drop-In, Prevention, or Resources above — or use the short form below.</p>
+                    <button class="cta compact" type="button" data-hash="register" onclick={handleDirectSignup}>
+                        Go to signup form
+                    </button>
+                </article>
+            </div>
+        </section>
+
+        <section class="register" id="register" data-anchor="register">
+            <c-acp-accept-grow-form></c-acp-accept-grow-form>
+        </section>
+
+        <c-acp-site-footer></c-acp-site-footer>
+    </div>
+</template>

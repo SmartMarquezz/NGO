@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Class seats and store items for All Care Plus training catalog</description>
+    <enableActivities>true</enableActivities>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <label>Training Offering</label>
+    <nameField>
+        <label>Offering Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Training Offerings</pluralLabel>
+    <sharingModel>ReadWrite</sharingModel>
+</CustomObject>

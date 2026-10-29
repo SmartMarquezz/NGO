@@ -1,0 +1,99 @@
+<template>
+    <div class="site">
+        <c-acp-site-nav active-page="services"></c-acp-site-nav>
+
+        <section class="hero">
+            <img class="hero-bg" src={media.hero} alt="" />
+            <div class="hero-shade"></div>
+            <div class="hero-copy">
+                <p class="eyebrow">OUR SERVICES</p>
+                <h1>How We Help Our Community</h1>
+                <p>
+                    Everything we offer falls into three buckets: Accept &amp; Grow, CPR &amp; First Aid, and Peer
+                    Support. Choose a path below - every signup lands in Salesforce.
+                </p>
+                <div class="hero-pills">
+                    <button class={pillGrowClass} type="button" data-focus="grow" onclick={handleFocus}>
+                        Accept &amp; Grow
+                    </button>
+                    <button class={pillCprClass} type="button" data-focus="cpr" onclick={handleFocus}>
+                        CPR &amp; First Aid
+                    </button>
+                    <button class={pillPeerClass} type="button" data-focus="peer" onclick={handleFocus}>
+                        Peer Support
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="spotlight reveal" data-reveal>
+            <div class="spotlight-media">
+                <img src={activeFocus.image} alt={activeFocus.alt} />
+                <span class="tag">{activeFocus.tag}</span>
+            </div>
+            <div class="spotlight-copy">
+                <p class="eyebrow dark">{activeFocus.eyebrow}</p>
+                <h2>{activeFocus.title}</h2>
+                <p>{activeFocus.body}</p>
+                <ul>
+                    <template for:each={activeFocus.points} for:item="point">
+                        <li key={point}>{point}</li>
+                    </template>
+                </ul>
+                <button class="cta" type="button" data-path={activeFocus.path} onclick={handlePath}>
+                    {activeFocus.cta}
+                </button>
+            </div>
+        </section>
+
+        <section class="grid-wrap reveal" data-reveal>
+            <div class="section-head">
+                <p class="eyebrow dark">THE THREE BUCKETS</p>
+                <h2>Pick where you want to begin</h2>
+            </div>
+            <div class="card-grid">
+                <template for:each={categories} for:item="item">
+                    <article key={item.key} class="card" data-path={item.path} onclick={handleCard}>
+                        <div class="shot"><img src={item.image} alt={item.alt} /></div>
+                        <div class="card-body">
+                            <h3>{item.title}</h3>
+                            <p>{item.summary}</p>
+                            <span class="text-link">{item.cta} ›</span>
+                        </div>
+                    </article>
+                </template>
+            </div>
+        </section>
+
+        <section class="flow reveal" data-reveal>
+            <div class="section-head">
+                <p class="eyebrow dark">HOW IT WORKS</p>
+                <h2>From interest to action - in one system</h2>
+            </div>
+            <div class="steps">
+                <article>
+                    <span>01</span>
+                    <h3>Choose a bucket</h3>
+                    <p>Accept &amp; Grow, CPR &amp; First Aid, or Peer Support.</p>
+                </article>
+                <article>
+                    <span>02</span>
+                    <h3>Register once</h3>
+                    <p>Forms and class seats land directly in Salesforce - no copy-paste.</p>
+                </article>
+                <article>
+                    <span>03</span>
+                    <h3>Pay &amp; confirm</h3>
+                    <p>QuickBooks payment links and confirmation codes when classes need them.</p>
+                </article>
+                <article>
+                    <span>04</span>
+                    <h3>Follow up</h3>
+                    <p>Your team sees every lead in one place and can nurture what comes next.</p>
+                </article>
+            </div>
+        </section>
+
+        <c-acp-site-footer></c-acp-site-footer>
+    </div>
+</template>

@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "Store",
+  "contentBody" : {
+    "activeViewId" : "store",
+    "configurationTags" : [ ],
+    "pageAccess" : "Public",
+    "routeType" : "custom-store",
+    "urlPrefix" : "store"
+  },
+  "urlName" : "store"
+}

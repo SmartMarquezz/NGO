@@ -1,0 +1,76 @@
+:host {
+    --navy: #0b1f3a; --navy-deep: #071528; --gold: #ea955d; --gold-deep: #d67d42;
+    --ink: #0b1f3a; --muted: #5a6573; --cream: #f7f5ef; --line: #e8ecf1;
+    display: block; font-family: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif; color: var(--ink);
+}
+.site { background: #fff; overflow-x: hidden; }
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .65s ease, transform .65s ease; }
+.reveal.is-in { opacity: 1; transform: none; }
+.eyebrow { margin: 0; letter-spacing: .12em; font-size: .78rem; font-weight: 700; color: var(--gold); text-transform: uppercase; }
+.eyebrow.dark { color: var(--gold-deep); }
+
+.hero { position: relative; min-height: min(60vh,600px); display: grid; align-items: end; color: #fff; overflow: hidden; }
+.hero-bg { position: absolute; inset: -3%; width: 106%; height: 106%; object-fit: cover; animation: kenburns 16s ease-in-out infinite alternate; }
+.hero-shade { position: absolute; inset: 0; background: linear-gradient(105deg, rgba(7,21,40,.86), rgba(7,21,40,.28)); }
+.hero-copy { position: relative; z-index: 1; padding: clamp(2rem,6vw,4rem) clamp(1.2rem,5vw,4rem); max-width: 42rem; display: grid; gap: .8rem; }
+.hero h1, .section h2 { margin: 0; font-weight: 700; line-height: 1.12; }
+.hero h1 { font-size: clamp(2rem,4.8vw,3.3rem); }
+.hero p { margin: 0; color: rgba(255,255,255,.9); line-height: 1.55; }
+
+.section { padding: clamp(2.6rem,6vw,4.25rem) clamp(1.2rem,5vw,4rem); }
+.section.alt { background: var(--cream); }
+.section h2 { font-size: clamp(1.6rem,3vw,2.2rem); margin: .35rem 0 1.2rem; }
+.issue-grid, .diff-grid, .story-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 1rem; }
+.issue-grid article, .diff-grid article, .story-grid blockquote {
+    border: 1px solid var(--line); border-radius: 1.1rem; padding: 1.2rem; background: #fff;
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+.issue-grid article:hover, .diff-grid article:hover, .story-grid blockquote:hover {
+    transform: translateY(-4px); box-shadow: 0 14px 30px rgba(11,31,58,.1);
+}
+.issue-grid h3, .diff-grid h3 { margin: 0 0 .4rem; }
+.issue-grid p, .diff-grid p, .story-grid p { margin: 0; color: var(--muted); line-height: 1.5; }
+.stat-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 1rem; margin-bottom: 1.3rem; }
+.stat-grid article { background: var(--navy); color: #fff; border-radius: 1.1rem; padding: 1.2rem; display: grid; gap: .25rem; }
+.stat-grid strong { font-size: 1.7rem; color: var(--gold); }
+.story-grid { margin-bottom: 1.2rem; }
+.story-grid cite { display: block; margin-top: .7rem; font-style: normal; font-weight: 700; color: var(--navy); }
+.cta { border: none; background: var(--gold); color: var(--navy-deep); font-weight: 700; padding: .85rem 1.2rem; border-radius: 999px; cursor: pointer; }
+.cta:hover { background: var(--gold-deep); color: #fff; }
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; align-items: center; margin-bottom: 1.4rem; }
+.split img { width: 100%; border-radius: 1.25rem; aspect-ratio: 5/4; object-fit: cover; }
+.split ul { margin: .8rem 0 0; padding-left: 1.05rem; color: var(--muted); line-height: 1.6; }
+.split p { margin: .55rem 0 0; color: var(--muted); line-height: 1.55; }
+.form-wrap {
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    width: 100%;
+}
+
+.form-wrap c-acp-volunteer-interest-form {
+    display: block;
+    width: 100%;
+}
+
+@keyframes kenburns { from { transform: scale(1.02);} to { transform: scale(1.08) translate(-1%,-1%);} }
+@media (max-width: 900px) {
+    .issue-grid, .diff-grid, .story-grid, .stat-grid, .split { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .reveal, .hero-bg { animation: none !important; transition: none !important; opacity: 1 !important; transform: none !important; }
+}
+
+
+@media (max-width: 620px) {
+    .cta {
+        width: 100%;
+        max-width: 100%;
+        text-align: center;
+        box-sizing: border-box;
+    }
+    .hero {
+        min-height: min(56vh, 480px);
+    }
+}

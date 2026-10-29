@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "Contact",
+  "contentBody" : {
+    "activeViewId" : "contactUs",
+    "configurationTags" : [ ],
+    "pageAccess" : "Public",
+    "routeType" : "custom-contact",
+    "urlPrefix" : "contact"
+  },
+  "urlName" : "contact"
+}

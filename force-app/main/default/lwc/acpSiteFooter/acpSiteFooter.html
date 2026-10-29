@@ -1,0 +1,33 @@
+<template>
+    <footer class="footer">
+        <div class="footer-brand">
+            <img src={logoUrl} alt="All Care Plus" />
+            <p>Care. Train. Empower. Self-care awareness and safety preparedness across communities.</p>
+        </div>
+        <div>
+            <h3>Explore</h3>
+            <button type="button" data-path="/" onclick={handlePath}>Home</button>
+            <button type="button" data-path="/about" onclick={handlePath}>About Us</button>
+            <button type="button" data-path="/our-services" onclick={handlePath}>Services</button>
+            <button type="button" data-path="/get-involved" onclick={handlePath}>Get Involved</button>
+            <button type="button" data-path="/get-involved#volunteer" onclick={handlePath}>Volunteer</button>
+            <button type="button" data-path="/contact" onclick={handlePath}>Contact</button>
+        </div>
+        <div>
+            <h3>Programs</h3>
+            <button type="button" data-path="/self-care#drop-in" onclick={handlePath}>Accept &amp; Grow Drop-In</button>
+            <button type="button" data-path="/cpr-classes#calendar" onclick={handlePath}>CPR Class Calendar</button>
+            <button type="button" data-path="/community-support" onclick={handlePath}>Peer Support</button>
+            <button type="button" data-path="/store" onclick={handlePath}>Store</button>
+            <button type="button" data-path="/donate" onclick={handlePath}>Donate</button>
+        </div>
+        <div>
+            <h3>Contact</h3>
+            <a href="mailto:success@allcareplus.org">success@allcareplus.org</a>
+            <a href="tel:+16504240204">(650) 424-0204</a>
+            <p>Palo Alto, California 94303</p>
+            <p>Internationally active</p>
+            <a href={fullRegistrationUrl} id="acp-full-cpr-registration">Full CPR registration</a>
+        </div>
+    </footer>
+</template>

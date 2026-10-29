@@ -1,0 +1,36 @@
+<template>
+    <header class={navClass}>
+        <button class="brand" type="button" onclick={handleBrand} aria-label="All Care Plus home">
+            <img class="logo" src={logoUrl} alt="All Care Plus" />
+            <span class="brand-text">
+                <strong>All Care Plus</strong>
+                <em>Care · Train · Empower</em>
+            </span>
+        </button>
+        <nav class="links" aria-label="Primary">
+            <template for:each={links} for:item="link">
+                <div key={link.key} class="nav-item">
+                    <button class={link.className} type="button" data-path={link.path} onclick={handleNav}>
+                        {link.label}
+                    </button>
+                    <template if:true={link.hasChildren}>
+                        <div class="dropdown">
+                            <template for:each={link.children} for:item="child">
+                                <button
+                                    key={child.key}
+                                    class="drop-link"
+                                    type="button"
+                                    data-path={child.path}
+                                    onclick={handleNav}
+                                >
+                                    {child.label}
+                                </button>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+            </template>
+            <button class="donate-cta" type="button" data-path="/donate" onclick={handleNav}>Donate</button>
+        </nav>
+    </header>
+</template>

@@ -1,0 +1,224 @@
+<template>
+    <div class="site">
+        <c-acp-site-nav active-page="home"></c-acp-site-nav>
+
+        <section class="hero">
+            <img class="hero-bg" src={media.hero} alt="Community growth and support at golden hour" />
+            <div class="hero-shade"></div>
+            <div class="hero-grain" aria-hidden="true"></div>
+            <div class="hero-copy reveal is-in">
+                <p class="brand-mark">ALL CARE PLUS</p>
+                <h1>
+                    <span class="line">Grow From</span>
+                    <span class="line accent">What You’ve Been Through</span>
+                </h1>
+                <p class="lede">Rooted in Palo Alto. Growing stronger through every experience.</p>
+                <div class="cta-row">
+                    <button class="cta" type="button" onclick={handleServices}>Explore Programs</button>
+                    <button class="cta ghost" type="button" data-path="/cpr-classes" onclick={handlePath}>
+                        Learn About Plus Rescuer
+                    </button>
+                </div>
+                <div class="hero-chips">
+                    <span>Accept &amp; Grow</span>
+                    <span>CPR &amp; First Aid</span>
+                    <span>Peer Support</span>
+                </div>
+            </div>
+            <div class="scroll-hint" aria-hidden="true">
+                <span></span>
+                Scroll
+            </div>
+        </section>
+
+        <section class="help reveal" data-reveal>
+            <div class="sun-glow" aria-hidden="true"></div>
+            <div class="section-head">
+                <p class="eyebrow">OUR SERVICES</p>
+                <h2>How We Help Our Community</h2>
+            </div>
+            <div class="help-grid">
+                <article class="help-card" data-path="/self-care" onclick={handleCard}>
+                    <div class="media-frame">
+                        <img src={media.accept} alt="Accept and Grow self-care and resilience support" />
+                        <span class="help-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8">
+                                <path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 11c0 5.6-7 10-7 10z"></path>
+                            </svg>
+                        </span>
+                    </div>
+                    <div class="help-body">
+                        <h3><span class="num">1</span> ACCEPT &amp; GROW</h3>
+                        <p>Build resilience, reduce stress and grow stronger from within.</p>
+                        <ul>
+                            <li>Intro to Self-Care for Success</li>
+                            <li>Individual Self-Care support</li>
+                            <li>Group Self-Care / suicide awareness skills</li>
+                            <li>Accept &amp; Grow Peer Certification</li>
+                        </ul>
+                        <span class="text-link">Explore Programs ›</span>
+                    </div>
+                </article>
+
+                <article class="help-card" data-path="/cpr-classes" onclick={handleCard}>
+                    <div class="media-frame">
+                        <img src={media.cpr} alt="Hands-on CPR and First Aid training" />
+                        <span class="help-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8">
+                                <rect x="4" y="7" width="16" height="12" rx="2"></rect>
+                                <path d="M9 7V5h6v2M12 11v5M9.5 13.5h5"></path>
+                            </svg>
+                        </span>
+                    </div>
+                    <div class="help-body">
+                        <h3><span class="num">2</span> CPR &amp; FIRST AID</h3>
+                        <p>Gain life-saving skills with flexible training options that fit your schedule.</p>
+                        <ul>
+                            <li>Online only and Virtual</li>
+                            <li>In-Person (Instructor Led)</li>
+                            <li>Blended (online + in-person skills)</li>
+                            <li>BLS, CPR, AED &amp; First Aid paths</li>
+                        </ul>
+                        <span class="text-link">View Classes ›</span>
+                    </div>
+                </article>
+
+                <article class="help-card" data-path="/community-support" onclick={handleCard}>
+                    <div class="media-frame">
+                        <img src={media.peer} alt="Neighbors connecting through peer support" />
+                        <span class="help-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8">
+                                <circle cx="9" cy="8" r="3"></circle>
+                                <circle cx="16" cy="9" r="2.5"></circle>
+                                <path d="M3.5 19c.6-3 2.8-4.5 5.5-4.5S14 16 14.5 19M13 14.8c1.4-.5 3-.3 4.5.7.7.5 1.3 1.3 1.7 2.5"></path>
+                            </svg>
+                        </span>
+                    </div>
+                    <div class="help-body">
+                        <h3><span class="num">3</span> PEER SUPPORT</h3>
+                        <p>Free support that shows up where people already gather.</p>
+                        <ul>
+                            <li>Self-Care Resources</li>
+                            <li>Peer volunteer opportunities at local events</li>
+                            <li>More Accept &amp; Grow and Plus Rescuer resources</li>
+                        </ul>
+                        <span class="text-link">Learn More ›</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="skills reveal" data-reveal>
+            <div class="skills-visual">
+                <img src={media.skills} alt="CPR practice building real response skills" />
+                <div class="skills-float">
+                    <strong>Skills that stick</strong>
+                    <span>Practice → confidence → action</span>
+                </div>
+            </div>
+            <div class="skills-copy">
+                <p class="eyebrow">LIFE-SAVING SKILLS</p>
+                <h2>Learn Skills That Can Save A Life</h2>
+                <p>Hands-on CPR and First Aid that leaves people ready, not just certified.</p>
+                <div class="skills-grid">
+                    <template for:each={skillItems} for:item="item">
+                        <button
+                            key={item.key}
+                            class="skill-item"
+                            type="button"
+                            data-path="/cpr-classes"
+                            onclick={handlePath}
+                        >
+                            <span class="skill-mark" aria-hidden="true"></span>
+                            <span>{item.label}</span>
+                        </button>
+                    </template>
+                </div>
+                <button class="cta" type="button" data-path="/cpr-classes" onclick={handlePath}>View All Classes</button>
+            </div>
+        </section>
+
+        <section class="rescuer reveal" data-reveal>
+            <div class="rescuer-visual">
+                <img src={media.rescuer} alt="Quiet focus before rescue readiness" />
+                <div class="orbit" aria-hidden="true"></div>
+            </div>
+            <div class="rescuer-copy">
+                <p class="eyebrow gold">HOW THE BUCKETS CONNECT</p>
+                <h2>Self-Care to Success</h2>
+                <p>
+                    Personal growth becomes community strength. Accept &amp; Grow builds the foundation. CPR &amp; First
+                    Aid builds the skill. Peer Support brings both into the places people already gather.
+                </p>
+                <div class="rescuer-points">
+                    <span>Accept &amp; Grow</span>
+                    <span>CPR &amp; First Aid</span>
+                    <span>Peer Support</span>
+                </div>
+                <button class="cta ghost-light" type="button" data-path="/our-services" onclick={handlePath}>
+                    Explore All Programs
+                </button>
+            </div>
+        </section>
+
+        <section class="together reveal" data-reveal>
+            <div class="together-copy">
+                <p class="eyebrow">GET INVOLVED</p>
+                <h2>Together, We Create Stronger Communities</h2>
+                <div class="together-list">
+                    <button type="button" data-path="/get-involved" onclick={handlePath}>
+                        <strong>Support Impact</strong>
+                        <span>Expand access to training and peer support.</span>
+                    </button>
+                    <button type="button" data-path="/get-involved" onclick={handlePath}>
+                        <strong>Volunteer Positions</strong>
+                        <span>Bring your time and skills to life-saving work.</span>
+                    </button>
+                    <button type="button" data-path="/get-involved" onclick={handlePath}>
+                        <strong>Community Events</strong>
+                        <span>Show up locally and grow with us.</span>
+                    </button>
+                </div>
+                <button class="cta" type="button" data-path="/get-involved" onclick={handlePath}>Become a Volunteer</button>
+            </div>
+            <div class="together-media">
+                <img src={media.together} alt="Community members joining hands outdoors" />
+            </div>
+        </section>
+
+        <section class="stories reveal" data-reveal>
+            <div class="section-head center-head">
+                <p class="eyebrow">IMPACT</p>
+                <h2>Real Stories. Real Impact.</h2>
+            </div>
+            <div class="story-grid">
+                <template for:each={stories} for:item="story">
+                    <article key={story.key}>
+                        <div class="story-photo">
+                            <img src={story.image} alt={story.alt} />
+                        </div>
+                        <p class="quote">“{story.body}”</p>
+                        <strong>{story.title}</strong>
+                        <div class="stars" aria-hidden="true">★★★★★</div>
+                    </article>
+                </template>
+            </div>
+            <button class="cta center-btn" type="button" onclick={handleImpact}>See more impact</button>
+        </section>
+
+        <section class="final-cta reveal" data-reveal>
+            <div>
+                <h2>Ready To Make An Impact?</h2>
+                <p>Start with Accept &amp; Grow, CPR &amp; First Aid, or Peer Support - or talk with our team.</p>
+            </div>
+            <div class="cta-row">
+                <button class="cta" type="button" data-path="/community-support" onclick={handlePath}>
+                    Request Peer Support
+                </button>
+                <button class="cta ghost-light" type="button" onclick={handleContact}>Talk to us</button>
+            </div>
+        </section>
+
+        <c-acp-site-footer></c-acp-site-footer>
+    </div>
+</template>

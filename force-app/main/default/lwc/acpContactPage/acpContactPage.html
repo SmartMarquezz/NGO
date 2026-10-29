@@ -1,0 +1,86 @@
+<template>
+    <div class="site">
+        <c-acp-site-nav active-page="contact"></c-acp-site-nav>
+
+        <section class="hero">
+            <img class="hero-bg" src={media.team} alt="" />
+            <div class="hero-shade"></div>
+            <div class="hero-copy">
+                <p class="eyebrow">CONTACT</p>
+                <h1>Let’s build a more ready community - together.</h1>
+                <p>Classes, partnerships, volunteering, donations, or community support. Tell us what you need.</p>
+            </div>
+        </section>
+
+        <section class="guides reveal" data-reveal>
+            <article>
+                <span class="num">01</span>
+                <h2>How to reach us</h2>
+                <ul class="facts">
+                    <li><strong>Phone</strong><a href="tel:+16504240204">(650) 424-0204</a></li>
+                    <li><strong>Email</strong><a href="mailto:ramesh@allcareplus.org">ramesh@allcareplus.org</a></li>
+                    <li><strong>Visit</strong><span>Palo Alto, California 94303</span></li>
+                </ul>
+            </article>
+            <article>
+                <span class="num">02</span>
+                <h2>Why people write</h2>
+                <ul>
+                    <li>Schedule CPR &amp; First Aid classes</li>
+                    <li>Join Accept &amp; Grow</li>
+                    <li>Request Peer Support at an event</li>
+                    <li>Volunteer, partner, or support impact</li>
+                </ul>
+            </article>
+            <article>
+                <span class="num">03</span>
+                <h2>What to expect</h2>
+                <ul>
+                    <li>A friendly reply with clear next steps</li>
+                    <li>Help choosing the right pathway</li>
+                    <li>Schedules, registration, and logistics</li>
+                </ul>
+            </article>
+        </section>
+
+        <section class="form-section reveal" data-reveal data-anchor="contact-form" id="contact-form">
+            <div class="form-intro">
+                <p class="eyebrow dark">SEND A MESSAGE</p>
+                <h2>We’re listening</h2>
+                <p>This short message is saved in Salesforce so we can follow up. For full CPR registration, use the link in the footer.</p>
+            </div>
+
+            <template if:true={isSent}>
+                <div class="success" role="status">
+                    <p>Thanks - your message was saved. We’ll follow up soon.</p>
+                </div>
+            </template>
+            <template if:true={submitError}>
+                <div class="error" role="alert">
+                    <p>{submitError}</p>
+                </div>
+            </template>
+
+            <form class="form" onsubmit={handleSubmit}>
+                <label>
+                    <span>Topic</span>
+                    <select name="topic" required onchange={handleChange}>
+                        <template for:each={topicOptions} for:item="opt">
+                            <option key={opt.value} value={opt.value} selected={opt.selected}>{opt.label}</option>
+                        </template>
+                    </select>
+                </label>
+                <label><span>First name</span><input type="text" name="firstName" required value={form.firstName} onchange={handleChange} /></label>
+                <label><span>Last name</span><input type="text" name="lastName" required value={form.lastName} onchange={handleChange} /></label>
+                <label><span>Email</span><input type="email" name="email" required value={form.email} onchange={handleChange} /></label>
+                <label><span>Phone</span><input type="tel" name="phone" value={form.phone} onchange={handleChange} /></label>
+                <label class="full"><span>Message</span><textarea name="message" rows="5" required value={form.message} onchange={handleChange}></textarea></label>
+                <div class="actions">
+                    <button class="cta" type="submit" disabled={isSubmitting}>{submitLabel}</button>
+                </div>
+            </form>
+        </section>
+
+        <c-acp-site-footer></c-acp-site-footer>
+    </div>
+</template>
